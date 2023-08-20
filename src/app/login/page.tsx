@@ -1,44 +1,7 @@
-"use client"
-import Link from 'next/link'
-import React, { useState } from 'react'
-import axios from "axios"
+"use client";
+import React from "react";
+import Login from "@/module/login/Login";
 
 export default function RegisterPage() {
-  const [student, setStudent] = useState({
-    email:"",
-    password:"",
-  })
-
-  const onLogin = async () => {
-    // try {
-    //     axios
-    // } catch (error:any) {
-    //     console.log(error.msg)
-    // }
-
-  }
-  return (
-    <div>
-        <h1>Login</h1>
-        <label htmlFor="email">Email: </label>
-        <input 
-            type="email"
-            id="email" 
-            value={student.email}
-            onChange={(e) => {setStudent({...student, email: e.target.value})}}
-        />
-        <br/>
-        <label htmlFor="password">Password: </label>
-        <input 
-            type="password"
-            id="password" 
-            value={student.password}
-            onChange={(e) => {setStudent({...student, password: e.target.value})}}
-        />
-        <br />
-        <button onClick={onLogin}>Login</button>
-        <br />
-        <Link href='/register'>Register here</Link>
-    </div>
-  )
+  return <Login />;
 }
