@@ -4,22 +4,9 @@ import { Typography, TextField, Button } from "@mui/material";
 import Link from "next/link";
 import Image from "next/image";
 import { ApplicationConstant } from "@/constant/applicationConstant";
+import Slideshow from "../slideshow/Slideshow";
 // import logo from ".../public/sou-logo.jpg"
 
-const MyCollection = [
-  {
-    label: "First Picture",
-    imgPath: "Slider-Images/1.webp",
-  },
-  {
-    label: "Second Picture",
-    imgPath: "Slider-Images/2.webp",
-  },
-  {
-    label: "Third Picture",
-    imgPath: "Slider-Images/3.webp",
-  },
-];
 
 const Register = () => {
   const [student, setStudent] = useState({
@@ -31,6 +18,7 @@ const Register = () => {
     cnfmPassword: "",
     isStudent: false,
   });
+
 
   const onSignup = async () => {
     try {
@@ -163,22 +151,7 @@ const Register = () => {
           </Link>
         </div>
       </div>
-
-      {/* slideshow */}
-      <div className="w-2/3">
-        <div className="w-full h-full bg-gray-200">
-          <Typography variant="h4" gutterBottom>
-            {/* Your logo image */}
-            <Image
-              src="/Slider-Images/1.webp"
-              alt="Logo"
-              width={100}
-              height={100}
-              className="w-full h-full"
-            />
-          </Typography>
-        </div>
-      </div>
+      <Slideshow />
     </div>
   );
 };
