@@ -1,3 +1,4 @@
+import { ApplicationConstant } from "@/constant/applicationConstant";
 import Link from "next/link";
 import React, { useState } from "react";
 
@@ -40,7 +41,7 @@ const Login = () => {
       <br />
       <button onClick={onLogin}>Login</button>
       <br />
-      <Link href="/register">Register here</Link>
+      <Link href={ApplicationConstant.REGISTER_URL_PATH}>Register here</Link>
     </div>
   );
 };

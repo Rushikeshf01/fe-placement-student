@@ -3,6 +3,7 @@ import authClient from "@/network/authClient";
 import { Typography, TextField, Button } from "@mui/material";
 import Link from "next/link";
 import Image from "next/image";
+import { ApplicationConstant } from "@/constant/applicationConstant";
 // import logo from ".../public/sou-logo.jpg"
 
 const MyCollection = [
@@ -51,7 +52,13 @@ const Register = () => {
     <div className="flex">
       <div className="w-1/3 flex flex-col h-screen justify-center items-center bg-gray-100">
         <Typography variant="h4" gutterBottom>
-          <Image src="/sou-logo2.png" alt="Logo" width={17} height={20} className="w-17 h-20" />
+          <Image
+            src="/sou-logo2.png"
+            alt="Logo"
+            width={17}
+            height={20}
+            className="w-17 h-20"
+          />
         </Typography>
         <div className="w-full bg-gray-100 p-8">
           <p className="text-4xl">Register</p>
@@ -151,7 +158,7 @@ const Register = () => {
               Already have an account? Log In
             </MuiLink> */}
           </div>
-          <Link href="/login" className="">
+          <Link href={ApplicationConstant.LOGIN_URL_PATH} className="">
             Login here
           </Link>
         </div>
