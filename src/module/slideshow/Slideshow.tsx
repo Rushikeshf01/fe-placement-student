@@ -1,26 +1,31 @@
-import React,{useState} from 'react'
-import Image from "next/image";
+import React, { useState } from "react";
+import Image, { StaticImageData } from "next/image";
+import photo1 from "../../../public/sliderImages/1.jpg";
+import photo2 from "../../../public/sliderImages/2.jpg";
+import photo3 from "../../../public/sliderImages/3.jpg";
+import photo4 from "../../../public/sliderImages/4.jpg";
+import photo5 from "../../../public/sliderImages/5.jpg";
+// import style from "./slideshow.module.css";
 
-const slideshowImages:string[] = ["/sliderImages/1.webp","/sliderImages/2.webp", "/sliderImages/3.webp", "/sliderImages/4.webp","/sliderImages/5.webp"];
+const slideshowImages: StaticImageData[] = [
+  photo1,
+  photo2,
+  photo3,
+  photo4,
+  photo5,
+];
 
 function Slideshow() {
-    const [images, setImages] = useState(slideshowImages[0])
+  const [slideImage, setSlideImage] = useState(slideshowImages[1]);
   return (
-    
-    
     <div className="w-2/3">
-    <div className="w-full h-full bg-gray-200">
-        <Image
-          src={images}
-          alt="Logo"
-          width={100}
-          height={100}
-          className="w-full h-full"
-        />
+      <Image
+        src={slideImage}
+        alt="Placement Overview Photos"
+        className="h-screen w-auto"
+      />
     </div>
-  </div>
-
-  )
+  );
 }
 
-export default Slideshow
+export default Slideshow;
