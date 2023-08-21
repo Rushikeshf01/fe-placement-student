@@ -2,6 +2,7 @@ import { ApplicationConstant } from "@/constant/applicationConstant";
 import { Button, TextField } from "@mui/material";
 import Link from "next/link";
 import React, { useState } from "react";
+import Captcha from "../captcha/Captcha";
 
 const Login = () => {
   const [student, setStudent] = useState({
@@ -41,6 +42,9 @@ const Login = () => {
             setStudent({ ...student, password: e.target.value });
           }}
         />
+      </div>
+      <div className="mt-2">
+        <Captcha />
       </div>
       <Button variant="outlined" className="mt-4" onClick={onLogin}>
         Log in

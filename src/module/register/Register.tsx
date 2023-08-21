@@ -3,6 +3,7 @@ import Link from "next/link";
 import authClient from "@/network/authClient";
 import { TextField, Button } from "@mui/material";
 import { ApplicationConstant } from "@/constant/applicationConstant";
+import Captcha from "../captcha/Captcha";
 // import style from "./register.module.css"
 
 const Register = () => {
@@ -96,6 +97,9 @@ const Register = () => {
             setStudent({ ...student, cnfmPassword: e.target.value });
           }}
         />
+      </div>
+      <div className="mt-2">
+        <Captcha />
       </div>
       <Button variant="outlined" className="mt-4" onClick={onSignup}>
         Sign Up

@@ -1,7 +1,7 @@
 import Slideshow from "@/module/slideshow/Slideshow";
 import Image from "next/image";
 import React from "react";
-import logo from "../../../public/sou-logo2.png";
+import logo from "../../../public/sou-logo.png";
 
 const RegisterLayout = ({ children }: { children: React.ReactNode }) => {
   return (
