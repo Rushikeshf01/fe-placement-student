@@ -1,12 +1,10 @@
 import React, { useState } from "react";
-import authClient from "@/network/authClient";
-import { Typography, TextField, Button } from "@mui/material";
 import Link from "next/link";
-import Image from "next/image";
+import authClient from "@/network/authClient";
+import { TextField, Button } from "@mui/material";
 import { ApplicationConstant } from "@/constant/applicationConstant";
-import Slideshow from "../slideshow/Slideshow";
-// import logo from ".../public/sou-logo.jpg"
-
+import Captcha from "../captcha/Captcha";
+// import style from "./register.module.css"
 
 const Register = () => {
   const [student, setStudent] = useState({
@@ -18,7 +16,6 @@ const Register = () => {
     cnfmPassword: "",
     isStudent: false,
   });
-
 
   const onSignup = async () => {
     try {
@@ -37,122 +34,86 @@ const Register = () => {
   };
 
   return (
-    <div className="flex">
-      <div className="w-1/3 flex flex-col h-screen justify-center items-center bg-gray-100">
-        <Typography variant="h4" gutterBottom>
-          <Image
-            src="/sou-logo2.png"
-            alt="Logo"
-            width={17}
-            height={20}
-            className="w-17 h-20"
-          />
-        </Typography>
-        <div className="w-full bg-gray-100 p-8">
-          <p className="text-4xl">Register</p>
-
-          <form className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <TextField
-              // className="w-full md:w-1/2 pr-4 mb-4 md:mb-0"
-              label="First Name"
-              type="text"
-              value={student.firstName}
-              required
-              variant="outlined"
-              fullWidth
-              margin="normal"
-              onChange={(e) => {
-                setStudent({ ...student, firstName: e.target.value });
-              }}
-            />
-            <TextField
-              // className="w-full md:w-1/2 pl mb-4 md:mb-0"
-              label="Last Name"
-              type="text"
-              value={student.lastName}
-              required
-              variant="outlined"
-              fullWidth
-              margin="normal"
-              onChange={(e) => {
-                setStudent({ ...student, lastName: e.target.value });
-              }}
-            />
-            <TextField
-              // className="w-full md:w-1/2 pr-4 mb-4 md:mb-0"
-              label="Email"
-              type="email"
-              value={student.email}
-              required
-              variant="outlined"
-              fullWidth
-              margin="normal"
-              onChange={(e) => {
-                setStudent({ ...student, email: e.target.value });
-              }}
-            />
-            <TextField
-              // className="w-full md:w-1/2 pl mb-4 md:mb-0"
-              label="Mobile"
-              type="text"
-              value={student.mobile}
-              required
-              variant="outlined"
-              fullWidth
-              margin="normal"
-              onChange={(e) => {
-                setStudent({ ...student, mobile: e.target.value });
-              }}
-            />
-            <TextField
-              // className="w-full md:w-1/2 pr-4 mb-4 md:mb-0"
-              label="Password"
-              type="password"
-              value={student.password}
-              required
-              variant="outlined"
-              fullWidth
-              margin="normal"
-              onChange={(e) => {
-                setStudent({ ...student, password: e.target.value });
-              }}
-            />
-            <TextField
-              // className="w-full md:w-1/2 pl mb-4 md:mb-0"
-              label="Confirm Password"
-              type="password"
-              value={student.cnfmPassword}
-              required
-              variant="outlined"
-              fullWidth
-              margin="normal"
-              onChange={(e) => {
-                setStudent({ ...student, cnfmPassword: e.target.value });
-              }}
-            />
-
-            <Button variant="outlined" color="primary" onClick={onSignup}>
-              Sign Up
-            </Button>
-          </form>
-
-          <div className="pt-4">
-            {/* <MuiLink
-              component={Link}
-              href="/login" // Adjust the path to your login page
-              passHref // Pass the href to the anchor element
-              color="primary"
-            >
-              Already have an account? Log In
-            </MuiLink> */}
-          </div>
-          <Link href={ApplicationConstant.LOGIN_URL_PATH} className="">
-            Login here
-          </Link>
-        </div>
+    <>
+      <p className="mt-6 text-3xl font-bold">Student Registration</p>
+      <div className="grid grid-cols-2 gap-3 mt-2">
+        <TextField
+          label="First Name"
+          type="text"
+          value={student.firstName}
+          required
+          variant="standard"
+          onChange={(e) => {
+            setStudent({ ...student, firstName: e.target.value });
+          }}
+        />
+        <TextField
+          label="Last Name"
+          type="text"
+          value={student.lastName}
+          required
+          variant="standard"
+          onChange={(e) => {
+            setStudent({ ...student, lastName: e.target.value });
+          }}
+        />
+        <TextField
+          label="Email"
+          type="email"
+          value={student.email}
+          required
+          variant="standard"
+          onChange={(e) => {
+            setStudent({ ...student, email: e.target.value });
+          }}
+        />
+        <TextField
+          label="Mobile"
+          type="text"
+          value={student.mobile}
+          required
+          variant="standard"
+          onChange={(e) => {
+            setStudent({ ...student, mobile: e.target.value });
+          }}
+        />
+        <TextField
+          label="Password"
+          type="password"
+          value={student.password}
+          required
+          variant="standard"
+          onChange={(e) => {
+            setStudent({ ...student, password: e.target.value });
+          }}
+        />
+        <TextField
+          label="Confirm Password"
+          type="password"
+          value={student.cnfmPassword}
+          required
+          variant="standard"
+          onChange={(e) => {
+            setStudent({ ...student, cnfmPassword: e.target.value });
+          }}
+        />
       </div>
-      <Slideshow />
-    </div>
+      <div className="mt-2">
+        <Captcha />
+      </div>
+      <Button variant="outlined" className="mt-4" onClick={onSignup}>
+        Sign Up
+      </Button>
+      <div className="mt-3.5">
+        Already have an account?{" "}
+        <Link
+          href={ApplicationConstant.LOGIN_URL_PATH}
+          className="font-semibold"
+        >
+          Login here
+        </Link>
+      </div>
+    </>
   );
 };
 
