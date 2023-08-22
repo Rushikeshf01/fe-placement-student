@@ -7,6 +7,7 @@ export const ApplicationConstant = {
 };
 
 export const ApiConstant = {
-  API_PATH: "http://127.0.0.1:8000",
+  API_BASE_PATH: "http://127.0.0.1:8000",
   API_SIGNUP_PATH: "/accounts/user/signup/",
+  API_LOGIN_PATH: "/accounts/user/token/",
 };
