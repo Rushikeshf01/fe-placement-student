@@ -8,7 +8,10 @@ interface JoiReturnType {
 
 class JoiUtils {
   private loginSchema = Joi.object({
-    email: Joi.string().email().required().label("Email"),
+    email: Joi.string()
+      .email({ minDomainSegments: 2, tlds: { allow: ["com", "in"] } })
+      .required()
+      .label("Email"),
     password: Joi.string()
       .pattern(
         new RegExp(

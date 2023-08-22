@@ -1,10 +1,9 @@
 import axios from "axios"
-import { ApiConstant,ApplicationConstant } from "@/constant/applicationConstant";
+import { ApiConstant } from "@/constant/applicationConstant";
 
 const authClient = axios.create({
-  baseURL: ApiConstant.API_PATH, // Set your auth server base URL here
+  baseURL: ApiConstant.API_BASE_PATH,
   timeout: 10000,
-  // You can add other default headers or interceptors here for authentication
 });
 
 export default authClient;
