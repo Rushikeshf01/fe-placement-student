@@ -13,7 +13,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { initialLoginState } from "@/store/slice/loginSlice";
 import { RootState } from "@/store/store";
 import { ToastErrorMessage } from "@/utils/toastifyAlerts";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 const Login = () => {
   const [loginInputState, setLoginInputState] = useState<LoginInputType>({
