@@ -3,7 +3,7 @@ import style from "./captcha.module.css";
 import { updateCaptchaValue } from "@/store/slice/extraSlice";
 import { useDispatch } from "react-redux";
 
-const Captcha = () => {
+const Captcha = (props: { className: string }) => {
   const [captchaText, setCaptchaText] = useState("");
   const dispatch = useDispatch();
 
@@ -85,7 +85,7 @@ const Captcha = () => {
     setCaptchaText(captchaString.join(""));
   };
 
-  return <div className={style.captcha}>{captchaText}</div>;
+  return <div className={`${style.captcha} ${props.className}`}>{captchaText}</div>;
 };
 
 export default Captcha;

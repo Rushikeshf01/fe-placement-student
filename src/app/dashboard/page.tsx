@@ -1,31 +1,31 @@
-"use client";
+"use client"
 
-import React, { useEffect } from "react";
-import Register from "@/module/register/Register";
-import { initializeAuthData } from "@/network/authClient";
 import { ApplicationConstant } from "@/constant/applicationConstant";
+import { initializeAuthData } from "@/network/authClient";
 import { RootState } from "@/store/store";
-import { useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
+import React, { useEffect } from "react";
+import { useSelector } from "react-redux";
 
-export default function RegisterPage() {
+const DashboardPage = () => {
   const router = useRouter();
   const isAuthenticated = useSelector(
     (state: RootState) => state.auth.isAuthenticated
   );
-
+  
   useEffect(() => {
     getAuthenticationStatus();
     if (isAuthenticated) {
       router.push(ApplicationConstant.DASHBOARD_PATH);
     } else {
-      router.push(ApplicationConstant.REGISTER_PATH);
+      router.push(ApplicationConstant.LOGIN_PATH);
     }
   }, []);
 
   const getAuthenticationStatus = async () => {
     await initializeAuthData();
   };
+  return <div>Dashboard</div>;
+};
 
-  return <Register />;
-}
+export default DashboardPage;

@@ -2,35 +2,62 @@ import React, { useState } from "react";
 import Link from "next/link";
 import authClient from "@/network/authClient";
 import { TextField, Button } from "@mui/material";
-import { ApplicationConstant } from "@/constant/applicationConstant";
+import {
+  ApiConstant,
+  ApplicationConstant,
+} from "@/constant/applicationConstant";
 import Captcha from "../captcha/Captcha";
+import { joiUtils } from "@/utils/joiValidation";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store/store";
+import { RegisterInputType } from "@/utils/types";
+import { ToastErrorMessage, ToastSuccessMessage } from "@/utils/toastifyAlerts";
 // import style from "./register.module.css"
 
 const Register = () => {
-  const [student, setStudent] = useState({
+  const [userInput, setUserInput] = useState<RegisterInputType>({
     firstName: "",
     lastName: "",
     mobile: "",
     email: "",
     password: "",
-    cnfmPassword: "",
-    isStudent: false,
+    confirmPassword: "",
+    captcha: "",
   });
+  const captcha = useSelector((state: RootState) => state.extra.captchaValue);
 
-  const onSignup = async () => {
-    try {
-      console.log("data before signup", student);
-      const response = await authClient.post("/accounts/user/signup/", {
-        firstName: student.firstName,
-        lastName: student.lastName,
-        mobile: student.mobile,
-        email: student.email,
-        password: student.password,
-      });
-      console.log("signup success", response.data);
-    } catch (error: any) {
-      console.log("signup failed", error.msg);
+  const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value, name } = e.currentTarget;
+    setUserInput((prevState) => ({ ...prevState, [name]: value }));
+  };
+
+  const handleClickRegister = () => {
+    const { status, message } = joiUtils.validateRegisterData(userInput);
+    if (status) {
+      if (userInput.password === userInput.confirmPassword) {
+        if (captcha === userInput.captcha) {
+          callRegisterAPI();
+        } else {
+          ToastErrorMessage("Invalid captcha value");
+        }
+      } else {
+        ToastErrorMessage("Password and confirm password doesn't match");
+      }
+    } else {
+      ToastErrorMessage(message);
     }
+  };
+
+  const callRegisterAPI = async () => {
+    const response = await authClient.post(ApiConstant.POST_NEW_USER, {
+      firstName: userInput.firstName,
+      lastName: userInput.lastName,
+      mobile: userInput.mobile,
+      email: userInput.email,
+      password: userInput.password,
+      isStudent: true,
+    });
+    ToastSuccessMessage("Registration successfull")
   };
 
   return (
@@ -38,76 +65,73 @@ const Register = () => {
       <p className="mt-6 text-3xl font-bold">Student Registration</p>
       <div className="grid grid-cols-2 gap-3 mt-2">
         <TextField
+          value={userInput.firstName}
+          onChange={handleOnChange}
+          name="firstName"
           label="First Name"
-          type="text"
-          value={student.firstName}
           required
           variant="standard"
-          onChange={(e) => {
-            setStudent({ ...student, firstName: e.target.value });
-          }}
         />
         <TextField
+          value={userInput.lastName}
+          onChange={handleOnChange}
+          name="lastName"
           label="Last Name"
-          type="text"
-          value={student.lastName}
           required
           variant="standard"
-          onChange={(e) => {
-            setStudent({ ...student, lastName: e.target.value });
-          }}
         />
         <TextField
+          value={userInput.email}
+          onChange={handleOnChange}
+          name="email"
           label="Email"
           type="email"
-          value={student.email}
           required
           variant="standard"
-          onChange={(e) => {
-            setStudent({ ...student, email: e.target.value });
-          }}
         />
         <TextField
+          value={userInput.mobile}
+          onChange={handleOnChange}
+          name="mobile"
           label="Mobile"
-          type="text"
-          value={student.mobile}
           required
           variant="standard"
-          onChange={(e) => {
-            setStudent({ ...student, mobile: e.target.value });
-          }}
         />
         <TextField
+          value={userInput.password}
+          onChange={handleOnChange}
+          name="password"
           label="Password"
           type="password"
-          value={student.password}
           required
           variant="standard"
-          onChange={(e) => {
-            setStudent({ ...student, password: e.target.value });
-          }}
         />
         <TextField
+          value={userInput.confirmPassword}
+          onChange={handleOnChange}
+          name="confirmPassword"
           label="Confirm Password"
-          type="password"
-          value={student.cnfmPassword}
           required
           variant="standard"
-          onChange={(e) => {
-            setStudent({ ...student, cnfmPassword: e.target.value });
-          }}
         />
+        <TextField
+          value={userInput.captcha}
+          onChange={handleOnChange}
+          name="captcha"
+          label="Enter captcha here"
+          required
+          variant="standard"
+        />
+        <Captcha className="" />
       </div>
-      <div className="mt-2">
-        <Captcha />
-      </div>
-      <Button variant="outlined" className="mt-4" onClick={onSignup}>
-        Sign Up
+
+      <Button variant="outlined" className="mt-4" onClick={handleClickRegister}>
+        Submit
       </Button>
       <div className="mt-3.5">
         Already have an account?{" "}
         <Link
-          href={ApplicationConstant.LOGIN_URL_PATH}
+          href={ApplicationConstant.LOGIN_PATH}
           className="font-semibold"
         >
           Login here
