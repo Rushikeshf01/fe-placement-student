@@ -11,6 +11,7 @@ import { joiUtils } from "@/utils/joiValidation";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
 import { RegisterInputType } from "@/utils/types";
+import { ToastErrorMessage, ToastSuccessMessage } from "@/utils/toastifyAlerts";
 // import style from "./register.module.css"
 
 const Register = () => {
@@ -33,28 +34,30 @@ const Register = () => {
   const handleClickRegister = () => {
     const { status, message } = joiUtils.validateRegisterData(userInput);
     if (status) {
-      if (captcha === userInput.captcha) {
-        callRegisterAPI();
+      if (userInput.password === userInput.confirmPassword) {
+        if (captcha === userInput.captcha) {
+          callRegisterAPI();
+        } else {
+          ToastErrorMessage("Invalid captcha value");
+        }
       } else {
-        // setFieldError("Invalid captcha value");
+        ToastErrorMessage("Password and confirm password doesn't match");
       }
     } else {
-      // setFieldError(message);
-      console.log(message);
+      ToastErrorMessage(message);
     }
   };
 
   const callRegisterAPI = async () => {
-    try {
-      const response = await authClient.post(ApiConstant.POST_NEW_USER, {
-        firstName: userInput.firstName,
-        lastName: userInput.lastName,
-        mobile: userInput.mobile,
-        email: userInput.email,
-        password: userInput.password,
-        isStudent: true,
-      });
-    } catch (error: any) {}
+    const response = await authClient.post(ApiConstant.POST_NEW_USER, {
+      firstName: userInput.firstName,
+      lastName: userInput.lastName,
+      mobile: userInput.mobile,
+      email: userInput.email,
+      password: userInput.password,
+      isStudent: true,
+    });
+    ToastSuccessMessage("Registration successfull")
   };
 
   return (
@@ -128,7 +131,7 @@ const Register = () => {
       <div className="mt-3.5">
         Already have an account?{" "}
         <Link
-          href={ApplicationConstant.LOGIN_URL_PATH}
+          href={ApplicationConstant.LOGIN_PATH}
           className="font-semibold"
         >
           Login here

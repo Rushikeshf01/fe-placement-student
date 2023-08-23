@@ -12,6 +12,8 @@ import authClient from "@/network/authClient";
 import { useDispatch, useSelector } from "react-redux";
 import { initialLoginState } from "@/store/slice/loginSlice";
 import { RootState } from "@/store/store";
+import { ToastErrorMessage } from "@/utils/toastifyAlerts";
+import { useRouter } from "next/router";
 
 const Login = () => {
   const [loginInputState, setLoginInputState] = useState<LoginInputType>({
@@ -21,6 +23,7 @@ const Login = () => {
   });
   const captcha = useSelector((state: RootState) => state.extra.captchaValue);
   const dispatch = useDispatch();
+  const router = useRouter();
 
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value, name } = e.currentTarget;
@@ -33,10 +36,10 @@ const Login = () => {
       if (captcha === loginInputState.captcha) {
         callLoginAPI();
       } else {
-        // setFieldError("Invalid captcha value");
+        ToastErrorMessage("Invalid captcha value");
       }
     } else {
-      // setFieldError(message);
+      ToastErrorMessage(message);
     }
   };
 
@@ -50,12 +53,13 @@ const Login = () => {
       ApplicationConstant.REFRESH_TOKEN,
       responce.data.refresh
     );
+    router.push(ApplicationConstant.DASHBOARD_PATH);
   };
 
   return (
     <>
       <p className="mt-6 text-3xl font-bold">Login</p>
-      <div className="grid grid-cols-1 gap-4 mt-3">
+      <div className="grid grid-cols-2 gap-4 mt-3">
         <TextField
           value={loginInputState.email}
           name="email"
@@ -82,15 +86,15 @@ const Login = () => {
           required
           variant="standard"
         />
+        <Captcha className="" />
       </div>
-      <Captcha className="mt-2" />
       <Button variant="outlined" className="mt-4" onClick={handleClickLogin}>
         Log in
       </Button>
       <div className="mt-3.5">
         {`Don't have an student account?`}{" "}
         <Link
-          href={ApplicationConstant.REGISTER_URL_PATH}
+          href={ApplicationConstant.REGISTER_PATH}
           className="font-semibold"
         >
           Register here

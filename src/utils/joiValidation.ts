@@ -36,7 +36,11 @@ class JoiUtils {
       .required()
       .label("Email"),
     password: Joi.string().alphanum().min(8).required().label("Password"),
-    confirmPassword: Joi.ref("password"),
+    confirmPassword: Joi.string()
+      .alphanum()
+      .min(8)
+      .required()
+      .label("Confirm password"),
     captcha: Joi.string().length(5).required().label("Captcha"),
   });
 

@@ -5,9 +5,11 @@ import {
 } from "@/constant/applicationConstant";
 import { store } from "@/store/store";
 import { initialLoginState, initialState } from "@/store/slice/loginSlice";
+import { ToastWarningMessage } from "@/utils/toastifyAlerts";
 
 const authClient = axios.create({
   baseURL: ApiConstant.BASE_URL,
+  timeout: 5000,
 });
 
 authClient.interceptors.request.use(
@@ -23,22 +25,27 @@ authClient.interceptors.response.use(
     if (error.response) {
       switch (error.response.status) {
         case 400:
-          // ToastWarnMessage(error.response.data.msg);
+          ToastWarningMessage(error.response.data.msg);
           break;
         case 401:
           // handle unauthorized error
+          ToastWarningMessage("Unauthorized action occured");
           break;
         case 404:
           // handle not found error
+          ToastWarningMessage("Requested resource not found");
           break;
         case 500:
           // handle internal server error
+          ToastWarningMessage("Internal server error");
           break;
         default:
           // handle other errors
+          ToastWarningMessage("Unexcepted error occured, Please try again after some time.");
           break;
       }
     } else {
+      ToastWarningMessage("Unexcepted error occured, Please try again after some time.");
     }
 
     return Promise.reject(error);

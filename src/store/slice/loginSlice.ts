@@ -2,7 +2,7 @@ import { UserDetailType } from "@/utils/types";
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 
-const initialState: UserDetailType = {
+export const initialState: UserDetailType = {
   refresh: "",
   access: "",
   isAuthenticated: false,
