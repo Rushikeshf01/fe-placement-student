@@ -25,10 +25,22 @@ const Register = () => {
     captcha: "",
   });
   const captcha = useSelector((state: RootState) => state.extra.captchaValue);
+  const [isPasswordSame, setIsPasswordSame] = useState(false)
+  const [allowSignUp, setAllowSignUp] = useState(false)
 
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value, name } = e.currentTarget;
     setUserInput((prevState) => ({ ...prevState, [name]: value }));
+
+    if (name == "confirmPassword" || name == "password") {
+      if (userInput.password === value ||userInput.confirmPassword === value) {
+        setIsPasswordSame(false);
+      } else {
+        setIsPasswordSame(true);
+      }
+    }
+    setAllowSignUp(false);
+    
   };
 
   const handleClickRegister = () => {
@@ -111,6 +123,7 @@ const Register = () => {
           onChange={handleOnChange}
           name="confirmPassword"
           label="Confirm Password"
+          type="password"
           required
           variant="standard"
         />
@@ -122,6 +135,7 @@ const Register = () => {
           required
           variant="standard"
         />
+        {isPasswordSame && <p className="red-font">Password doesn't match</p>}
         <Captcha className="" />
       </div>
 
