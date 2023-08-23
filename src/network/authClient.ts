@@ -1,3 +1,5 @@
+"use client"
+
 import axios from "axios";
 import {
   ApiConstant,
@@ -5,7 +7,7 @@ import {
 } from "@/constant/applicationConstant";
 import { store } from "@/store/store";
 import { initialLoginState, initialState } from "@/store/slice/loginSlice";
-import { ToastWarningMessage } from "@/utils/toastifyAlerts";
+import { ToastErrorMessage, ToastWarningMessage } from "@/utils/toastifyAlerts";
 
 const authClient = axios.create({
   baseURL: ApiConstant.BASE_URL,
@@ -29,7 +31,11 @@ authClient.interceptors.response.use(
           break;
         case 401:
           // handle unauthorized error
-          ToastWarningMessage("Unauthorized action occured");
+          if (error.response.data.detail) {
+            ToastErrorMessage(error.response.data.detail);
+          } else {
+            ToastErrorMessage("Unauthorized action");
+          }
           break;
         case 404:
           // handle not found error
@@ -41,11 +47,15 @@ authClient.interceptors.response.use(
           break;
         default:
           // handle other errors
-          ToastWarningMessage("Unexcepted error occured, Please try again after some time.");
+          ToastWarningMessage(
+            "Unexcepted error occured, Please try again after some time."
+          );
           break;
       }
     } else {
-      ToastWarningMessage("Unexcepted error occured, Please try again after some time.");
+      ToastWarningMessage(
+        "Unexcepted error occured, Please try again after some time."
+      );
     }
 
     return Promise.reject(error);
@@ -64,7 +74,9 @@ export const initializeAuthData = async () => {
     });
     store.dispatch(
       initialLoginState({
-        ...response.data,
+        access: response.data.access,
+        refresh: response.data.refresh,
+        user: response.data.user,
         isAuthenticated: true,
       })
     );

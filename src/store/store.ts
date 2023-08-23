@@ -1,3 +1,5 @@
+"use client"
+
 import { configureStore } from "@reduxjs/toolkit";
 import authReducer from "./slice/loginSlice";
 import extraReducer from "./slice/extraSlice";
@@ -7,7 +9,6 @@ export const store = configureStore({
     auth: authReducer,
     extra: extraReducer,
   },
-  devTools: process.env.NODE_ENV !== "production",
 });
 
 // Infer the `RootState` and `AppDispatch` types from the store itself
