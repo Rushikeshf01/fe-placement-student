@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import axios from "axios";
 import {
@@ -27,23 +27,28 @@ authClient.interceptors.response.use(
     if (error.response) {
       switch (error.response.status) {
         case 400:
-          ToastWarningMessage(error.response.data.msg);
+          // handle bad request
+          if (error.response.data.detail) {
+            ToastErrorMessage(error.response.data.detail[0]);
+          } else {
+            ToastWarningMessage("400 - Bad request");
+          }
           break;
         case 401:
           // handle unauthorized error
           if (error.response.data.detail) {
-            ToastErrorMessage(error.response.data.detail);
+            ToastErrorMessage(error.response.data.detail[0]);
           } else {
-            ToastErrorMessage("Unauthorized action");
+            ToastWarningMessage("401 - Unauthorized action");
           }
           break;
         case 404:
           // handle not found error
-          ToastWarningMessage("Requested resource not found");
+          ToastWarningMessage("404 - Requested resource not found");
           break;
         case 500:
           // handle internal server error
-          ToastWarningMessage("Internal server error");
+          ToastWarningMessage("500 - Internal server error");
           break;
         default:
           // handle other errors
