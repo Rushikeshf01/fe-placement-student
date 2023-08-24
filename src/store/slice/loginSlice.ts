@@ -1,3 +1,5 @@
+"use client";
+
 import { UserDetailType } from "@/utils/types";
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
@@ -23,7 +25,10 @@ export const loginSlice = createSlice({
   initialState,
   reducers: {
     initialLoginState: (state, action: PayloadAction<UserDetailType>) => {
-      state = action.payload;
+      state.access = action.payload.access;
+      state.refresh = action.payload.refresh;
+      state.user = action.payload.user;
+      state.isAuthenticated = action.payload.isAuthenticated;
     },
   },
 });

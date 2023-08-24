@@ -1,7 +1,8 @@
-"use client"
+"use client";
 
 import { ApplicationConstant } from "@/constant/applicationConstant";
-import { initializeAuthData } from "@/network/authClient";
+import Faculty from "@/module/faculty/Faculty";
+import Student from "@/module/student/Student";
 import { RootState } from "@/store/store";
 import { useRouter } from "next/navigation";
 import React, { useEffect } from "react";
@@ -12,9 +13,12 @@ const DashboardPage = () => {
   const isAuthenticated = useSelector(
     (state: RootState) => state.auth.isAuthenticated
   );
-  
+  const isStudent = useSelector(
+    (state: RootState) => state.auth.user.isStudent
+  );
+  const isFaculty = useSelector((state: RootState) => state.auth.user.isStaff);
+
   useEffect(() => {
-    getAuthenticationStatus();
     if (isAuthenticated) {
       router.push(ApplicationConstant.DASHBOARD_PATH);
     } else {
@@ -22,10 +26,12 @@ const DashboardPage = () => {
     }
   }, []);
 
-  const getAuthenticationStatus = async () => {
-    await initializeAuthData();
-  };
-  return <div>Dashboard</div>;
+  return (
+    <>
+      {isStudent && <Student />}
+      {isFaculty && <Faculty />}
+    </>
+  );
 };
 
 export default DashboardPage;

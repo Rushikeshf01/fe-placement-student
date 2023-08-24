@@ -1,3 +1,5 @@
+"use client";
+
 import {
   ApiConstant,
   ApplicationConstant,
@@ -44,14 +46,21 @@ const Login = () => {
   };
 
   const callLoginAPI = async () => {
-    const responce = await authClient.post(ApiConstant.AUTHENTICATE_USER, {
+    const response = await authClient.post(ApiConstant.AUTHENTICATE_USER, {
       email: loginInputState.email,
       password: loginInputState.password,
     });
-    dispatch(initialLoginState({ ...responce.data, isAuthenticated: true }));
+    dispatch(
+      initialLoginState({
+        access: response.data.access,
+        refresh: response.data.refresh,
+        user: response.data.user,
+        isAuthenticated: true,
+      })
+    );
     localStorage.setItem(
       ApplicationConstant.REFRESH_TOKEN,
-      responce.data.refresh
+      response.data.refresh
     );
     router.push(ApplicationConstant.DASHBOARD_PATH);
   };
