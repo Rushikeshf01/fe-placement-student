@@ -111,6 +111,7 @@ const Register = () => {
           onChange={handleOnChange}
           name="confirmPassword"
           label="Confirm Password"
+          type="password"
           required
           variant="standard"
         />
