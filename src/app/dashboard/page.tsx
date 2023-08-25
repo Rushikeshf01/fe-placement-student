@@ -1,5 +1,6 @@
 "use client";
 
+import Sidebar from "@/commonComponents/Sidebar";
 import { ApplicationConstant } from "@/constant/applicationConstant";
 import Faculty from "@/module/faculty/Faculty";
 import Student from "@/module/student/Student";
@@ -28,8 +29,9 @@ const DashboardPage = () => {
 
   return (
     <>
-      {isStudent && <Student />}
-      {isFaculty && <Faculty />}
+      <Sidebar />
+      {/* {isStudent && <Student />}
+      {isFaculty && <Faculty />} */}
     </>
   );
 };
