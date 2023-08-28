@@ -1,4 +1,5 @@
 // Types decraled here
+import { ReactNode } from "react";
 
 export interface LoginInputType {
   email: string;
@@ -30,4 +31,15 @@ export interface UserDetailType {
     isStaff: boolean;
     updatedAt: "2023-08-22T06:19:37.865244Z";
   };
+}
+
+export interface SidebarRoutesType {
+  path: string;
+  element: ReactNode;
+  state: string;
+  sidebarProps: {
+    displayText: string,
+    icon?: ReactNode;
+  }
+
 }
