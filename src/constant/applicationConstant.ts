@@ -12,4 +12,6 @@ export const ApiConstant = {
   POST_NEW_USER: "accounts/user/signup/",
   AUTHENTICATE_USER: "accounts/user/token/",
   GET_NEW_ACCESS_TOKEN: "accounts/user/token/refresh/",
+  GET_STUDENT_PROFILE_DASHBOARD: "students/dashboard-profile/",
+  GET_FACULTY_PROFILE_DASHBOARD: "faculty/dashboard-profile/",
 };
