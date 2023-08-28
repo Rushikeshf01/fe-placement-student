@@ -1,22 +1,19 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/store/store";
+import { studentProfile } from "@/store/slice/studentSlice";
+import { facultyProfile } from "@/store/slice/facultySlice";
 import appClient from "@/network/appClient";
 import { ApiConstant } from "@/constant/applicationConstant";
 import Sidebar from "@/commonComponents/Sidebar";
 import Navbar from "@/commonComponents/navbar/Navbar";
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
-  const user = useSelector((state: RootState) => state.auth.user);
-
-  const [dashboardProfile, setDashboardProfile] = useState({
-    firstName: user.firstName,
-    lastName: user.lastName,
-    profilePic: null,
-  });
   const [toggleSidebar, setToggleSidebar] = useState(false);
+  const dispatch = useDispatch();
+  const user = useSelector((state: RootState) => state.auth.user);
 
   useEffect(() => {
     getDashboardProfile();
@@ -25,21 +22,15 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   const getDashboardProfile = async () => {
     if (user.isStudent) {
       const res = await appClient.get(
-        `${ApiConstant.GET_STUDENT_PROFILE_DASHBOARD}${user.id}`
+        `${ApiConstant.GET_STUDENT_PROFILE}${user.id}`
       );
-      setDashboardProfile((prevState) => ({
-        ...prevState,
-        profilePic: res.data.accountDetail?.profilePic,
-      }));
+      dispatch(studentProfile(res.data));
     }
     if (user.isStaff) {
       const res = await appClient.get(
-        `${ApiConstant.GET_FACULTY_PROFILE_DASHBOARD}${user.id}`
+        `${ApiConstant.GET_FACULTY_PROFILE}${user.id}`
       );
-      setDashboardProfile((prevState) => ({
-        ...prevState,
-        profilePic: res.data.facultyDetail?.profilePic,
-      }));
+      dispatch(facultyProfile(res.data));
     }
   };
 
@@ -48,11 +39,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   };
   return (
     <>
-      <Navbar
-        firstName={dashboardProfile.firstName}
-        profilePic={dashboardProfile.profilePic}
-        showHideSidebar={showHideSidebar}
-      />
+      <Navbar showHideSidebar={showHideSidebar} />
       <div className="flex">
         {toggleSidebar && <Sidebar />}
         <div>{children}</div>
