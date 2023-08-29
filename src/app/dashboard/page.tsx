@@ -1,5 +1,6 @@
 "use client";
 
+import Sidebar from "@/commonComponents/Slidebar/Sidebar";
 import { ApplicationConstant } from "@/constant/applicationConstant";
 import Faculty from "@/module/faculty/Faculty";
 import Student from "@/module/student/Student";
