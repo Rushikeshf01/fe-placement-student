@@ -91,10 +91,12 @@ export interface FacultyProfileType {
 
 export interface SidebarRoutesType {
   path: string;
-  element: ReactNode;
+  // element: ReactNode;
   state: string;
-  sidebarProps: {
-    displayText: string;
-    icon?: ReactNode;
-  };
+  child?:SidebarRoutesType []
+  icon?: ReactNode;
+}
+
+export interface NestedSlidebarProps {
+  subRoutes: SidebarRoutesType[]
 }
