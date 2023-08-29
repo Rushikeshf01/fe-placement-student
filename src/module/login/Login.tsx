@@ -7,7 +7,6 @@ import {
 import { Button, TextField } from "@mui/material";
 import Link from "next/link";
 import React, { useState } from "react";
-import Captcha from "../captcha/Captcha";
 import { LoginInputType } from "@/utils/types";
 import { joiUtils } from "@/utils/joiValidation";
 import authClient from "@/network/authClient";
@@ -16,6 +15,7 @@ import { initialLoginState } from "@/store/slice/loginSlice";
 import { RootState } from "@/store/store";
 import { ToastErrorMessage } from "@/utils/toastifyAlerts";
 import { useRouter } from "next/navigation";
+import Captcha from "@/commonComponents/captcha/Captcha";
 
 const Login = () => {
   const [loginInputState, setLoginInputState] = useState<LoginInputType>({

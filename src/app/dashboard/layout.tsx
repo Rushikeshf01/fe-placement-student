@@ -7,8 +7,9 @@ import { studentProfile } from "@/store/slice/studentSlice";
 import { facultyProfile } from "@/store/slice/facultySlice";
 import appClient from "@/network/appClient";
 import { ApiConstant } from "@/constant/applicationConstant";
-import Sidebar from "@/commonComponents/Sidebar";
 import Navbar from "@/commonComponents/navbar/Navbar";
+import NestedSlidebar from "@/commonComponents/Slidebar/NestedSlidebar";
+import Sidebar from "@/commonComponents/Slidebar/Sidebar";
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   const [toggleSidebar, setToggleSidebar] = useState(false);
