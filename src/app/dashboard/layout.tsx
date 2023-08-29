@@ -7,7 +7,7 @@ import { studentProfile } from "@/store/slice/studentSlice";
 import { facultyProfile } from "@/store/slice/facultySlice";
 import appClient from "@/network/appClient";
 import { ApiConstant } from "@/constant/applicationConstant";
-import Sidebar from "@/commonComponents/Sidebar";
+import Sidebar from "@/commonComponents/sidebar/Sidebar";
 import Navbar from "@/commonComponents/navbar/Navbar";
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {

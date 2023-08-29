@@ -14,12 +14,11 @@ import { ExpandLess, ExpandMore } from '@mui/icons-material';
 
 import style from "./sidebar.module.css"
 import { SidebarRoutesType } from "@/utils/types";
-import NestedSlidebar from "./NestedSlidebar";
+import NestedSidebar from "./NestedSidebar";
 
 const sidebarRoutes: SidebarRoutesType[] = [
     {
         path: "/home",
-        // element: <Login />,
         state: "Home",
         icon: <HomeIcon />
     },
@@ -90,7 +89,7 @@ const Sidebar = () => {
                     </p>
                 </Link>
                 {route.child && isExpanded ? (
-                    <NestedSlidebar key={index} subRoutes={route.child} />
+                    <NestedSidebar key={index} subRoutes={route.child} />
                 ) : ""}
             </div>
         ));

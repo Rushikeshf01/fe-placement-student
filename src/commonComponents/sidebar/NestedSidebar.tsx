@@ -1,8 +1,8 @@
 import Link from "next/link";
-import { NestedSlidebarProps } from "@/utils/types"
+import { NestedSidebarProps } from "@/utils/types"
 import style from "./sidebar.module.css"
 
-const NestedSlidebar = (props: NestedSlidebarProps) => {
+const NestedSlidebar = (props: NestedSidebarProps) => {
 
     return (
         <>
