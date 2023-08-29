@@ -2,9 +2,8 @@ export const ApplicationConstant = {
   REFRESH_TOKEN: "refreshKey",
   LOGIN_PATH: "/login",
   REGISTER_PATH: "/register",
-  HOME_PATH: "/home",
-  USER_PATH: "/user",
   DASHBOARD_PATH: "/dashboard",
+  STUDENT_PROFILE_PATH: "/dashboard/student/profile"
 };
 
 export const ApiConstant = {

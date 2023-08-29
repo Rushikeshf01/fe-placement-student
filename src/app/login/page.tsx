@@ -16,7 +16,7 @@ export default function RegisterPage() {
   const getAuthenticationStatus = async () => {
     const status = await initializeAuthData();
     if (status) {
-      router.push(ApplicationConstant.DASHBOARD_PATH);
+      router.back()
     } else {
       router.push(ApplicationConstant.LOGIN_PATH);
     }
