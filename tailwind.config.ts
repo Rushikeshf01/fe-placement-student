@@ -6,7 +6,7 @@ const config: Config = {
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
     './src/module/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/component/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/commonComponents/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
     extend: {

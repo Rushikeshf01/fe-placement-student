@@ -10,14 +10,12 @@ import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 
 const DashboardPage = () => {
+  const user = useSelector((state: RootState) => state.auth.user);
   const router = useRouter();
-  const isAuthenticated = useSelector(
+
+  const isAuthenticated: boolean = useSelector(
     (state: RootState) => state.auth.isAuthenticated
   );
-  const isStudent = useSelector(
-    (state: RootState) => state.auth.user.isStudent
-  );
-  const isFaculty = useSelector((state: RootState) => state.auth.user.isStaff);
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -29,9 +27,8 @@ const DashboardPage = () => {
 
   return (
     <>
-      <Sidebar />
-      {/* {isStudent && <Student />}
-      {isFaculty && <Faculty />} */}
+      {user.isStudent && <Student />}
+      {user.isStaff && <Faculty />}
     </>
   );
 };
