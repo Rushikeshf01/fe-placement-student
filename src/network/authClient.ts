@@ -94,4 +94,10 @@ export const initializeAuthData = async () => {
   }
 };
 
+export const logoutFunc = () => {
+  store.dispatch(initialLoginState(initialState));
+  localStorage.clear();
+  sessionStorage.clear();
+};
+
 export default authClient;
