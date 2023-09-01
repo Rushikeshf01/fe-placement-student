@@ -14,12 +14,11 @@ import { ExpandLess, ExpandMore } from '@mui/icons-material';
 
 import style from "./sidebar.module.css"
 import { SidebarRoutesType } from "@/utils/types";
-import NestedSlidebar from "./NestedSlidebar";
+import NestedSidebar from "./NestedSidebar";
 
 const sidebarRoutes: SidebarRoutesType[] = [
     {
         path: "/home",
-        // element: <Login />,
         state: "Home",
         icon: <HomeIcon />
     },
@@ -79,18 +78,18 @@ const Sidebar = () => {
 
     const renderSidebarItems = (items: SidebarRoutesType[]) => {
         return items.map((route, index) => (
-            <div key={index}>
+            <div key={index} className="font-bold">
                 <Link
                     href={route.path}
-                    className={`${style.items}`} key={index}>
+                    className="flex flex-row rounded-xl m-2.5 p-4 hover:bg-gray-400 cursor-pointer">
                     {route.icon}
-                    <p className="flex">
+                    <p className="flex pl-2.5 w-full justify-between">
                         {route.state}
                         {route.child && (isExpanded ? <ExpandLess onClick={handelNestedRoutes} /> : <ExpandMore onClick={handelNestedRoutes} />)}
                     </p>
                 </Link>
                 {route.child && isExpanded ? (
-                    <NestedSlidebar key={index} subRoutes={route.child} />
+                    <NestedSidebar key={index} subRoutes={route.child} />
                 ) : ""}
             </div>
         ));
@@ -98,7 +97,7 @@ const Sidebar = () => {
 
 
     return (
-        <div className={`${style.sidebar}`}>
+        <div className="flex flex-col h-full w-1/6 rounded-2xl bg-[#dcdbdb] z-10">
             {renderSidebarItems(sidebarRoutes)}
         </div>
 

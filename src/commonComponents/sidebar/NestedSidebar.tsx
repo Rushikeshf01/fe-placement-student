@@ -1,8 +1,7 @@
 import Link from "next/link";
-import { NestedSlidebarProps } from "@/utils/types"
-import style from "./sidebar.module.css"
+import { NestedSidebarProps } from "@/utils/types"
 
-const NestedSlidebar = (props: NestedSlidebarProps) => {
+const NestedSlidebar = (props: NestedSidebarProps) => {
 
     return (
         <>
@@ -10,8 +9,8 @@ const NestedSlidebar = (props: NestedSlidebarProps) => {
             <div key={index}>
                 <Link
                     href={route.path}
-                    className={`${style.subItems}`} key={index}>
-                    <p className="flex">
+                    className="flex flex-row my-4 mx-12 p-2.5 rounded-xl hover:bg-gray-400 cursor-pointer" key={index}>
+                    <p className="flex pl-2.5 w-full justify-between">
                         {route.state}
                     </p>
                 </Link>
