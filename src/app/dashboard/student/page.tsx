@@ -1,5 +1,6 @@
 "use client";
 
+import { IsComplete } from "@/commonComponents/alert/Alerts";
 import { ApplicationConstant } from "@/constant/applicationConstant";
 import { RootState } from "@/store/store";
 import { UserDetailType } from "@/utils/types";
@@ -11,6 +12,7 @@ const StudentPage = () => {
   const authClient: UserDetailType = useSelector(
     (state: RootState) => state.auth
   );
+  const student = useSelector((state: RootState) => state.student);
   const router = useRouter();
 
   useEffect(() => {
@@ -19,7 +21,13 @@ const StudentPage = () => {
     }
   }, []);
 
-  return <>{authClient.user.isStudent && <div>StudentPage</div>}</>;
+  return (
+    <>
+      {authClient.user.isStudent && (
+        <div>{!student.studentDetail?.isCompleted && <IsComplete />}</div>
+      )}
+    </>
+  );
 };
 
 export default StudentPage;

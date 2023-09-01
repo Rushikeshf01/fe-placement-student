@@ -40,9 +40,13 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
       <Navbar showHideSidebar={showHideSidebar} />
-      <div className="flex">
+      <div
+        className={`grid ${
+          toggleSidebar ? "grid-cols-[max-content_auto]" : "grid-cols-1"
+        }`}
+      >
         {toggleSidebar && <Sidebar />}
-        <div>{children}</div>
+        {children}
       </div>
     </>
   );
