@@ -9,27 +9,23 @@ import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 
 const DashboardPage = () => {
-  const user = useSelector((state: RootState) => state.auth.user);
+  const authClient = useSelector((state: RootState) => state.auth);
   const router = useRouter();
 
-  const isAuthenticated: boolean = useSelector(
-    (state: RootState) => state.auth.isAuthenticated
-  );
-
   useEffect(() => {
-    if (isAuthenticated) {
-      router.push(ApplicationConstant.DASHBOARD_PATH);
+    if (authClient.isAuthenticated) {
+      if (authClient.user.isStudent) {
+        router.push(ApplicationConstant.STUDENT_DASHBOARD_PATH);
+      }
+      if (authClient.user.isStaff) {
+        router.push(ApplicationConstant.FACULTY_DASHBOARD_PATH);
+      }
     } else {
       router.push(ApplicationConstant.LOGIN_PATH);
     }
   }, []);
 
-  return (
-    <>
-      {user.isStudent && <Student />}
-      {user.isStaff && <Faculty />}
-    </>
-  );
+  return <></>;
 };
 
 export default DashboardPage;

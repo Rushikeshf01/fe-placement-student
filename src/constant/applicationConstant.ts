@@ -3,7 +3,10 @@ export const ApplicationConstant = {
   LOGIN_PATH: "/login",
   REGISTER_PATH: "/register",
   DASHBOARD_PATH: "/dashboard",
-  STUDENT_PROFILE_PATH: "/dashboard/student/profile"
+  STUDENT_DASHBOARD_PATH: "/dashboard/student",
+  STUDENT_PROFILE_PATH: "/dashboard/student/profile",
+  FACULTY_DASHBOARD_PATH: "/dashboard/faculty",
+  FACULTY_PROFILE_PATH: "/dashboard/faculty/profile",
 };
 
 export const ApiConstant = {

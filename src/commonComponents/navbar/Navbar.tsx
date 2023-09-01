@@ -55,12 +55,22 @@ const Navbar = (props: { showHideSidebar: any }) => {
 };
 
 const ProfileBar = () => {
+  const user = useSelector((state: RootState) => state.auth.user);
   const router = useRouter();
 
   return (
     <div className="w-full absolute top-[130%] p-[10px] text-center rounded-md bg-gray-100 shadow z-10">
       <div className="font-medium text-lg">
-        <Link href={ApplicationConstant.STUDENT_PROFILE_PATH}>My Profile</Link>
+        {user.isStudent && (
+          <Link href={ApplicationConstant.STUDENT_PROFILE_PATH}>
+            My Profile
+          </Link>
+        )}
+        {user.isStaff && (
+          <Link href={ApplicationConstant.FACULTY_PROFILE_PATH}>
+            My Profile
+          </Link>
+        )}
       </div>
       <button
         className="mt-4 text-sm text-red-500"
