@@ -1,6 +1,5 @@
 "use client";
 
-import { IsCompleteForFaculty } from "@/commonComponents/alert/Alerts";
 import { ApplicationConstant } from "@/constant/applicationConstant";
 import { RootState } from "@/store/store";
 import { UserDetailType } from "@/utils/types";
@@ -21,15 +20,7 @@ const FacultyPage = () => {
     }
   }, []);
 
-  return (
-    <>
-      {authClient.user.isStaff && (
-        <div>
-          {!faculty.facultyDetail?.isCompleted && <IsCompleteForFaculty />}
-        </div>
-      )}
-    </>
-  );
+  return <>{authClient.user.isStaff && <div></div>}</>;
 };
 
 export default FacultyPage;

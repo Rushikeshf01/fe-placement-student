@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Image from "next/image";
-import { Avatar } from "@mui/material";
+import { Avatar, Tooltip } from "@mui/material";
 import { Logout, MenuRounded } from "@mui/icons-material";
 import Logo from "../../../public/sou-logo.png";
 import { useSelector } from "react-redux";
@@ -22,10 +22,12 @@ const Navbar = (props: { showHideSidebar: any }) => {
 
   return (
     <div className="flex justify-between items-center shadow-lg	px-[20px] py-[15px]">
-      <MenuRounded
-        className="cursor-pointer text-4xl"
-        onClick={props.showHideSidebar}
-      />
+      <Tooltip title="Menu" placement="right">
+        <MenuRounded
+          className="cursor-pointer text-4xl"
+          onClick={props.showHideSidebar}
+        />
+      </Tooltip>
       <Image src={Logo} alt="Silver Oak University" className="w-[140px]" />
       <div
         onClick={handleToggleProfileBar}
