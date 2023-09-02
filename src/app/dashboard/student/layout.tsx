@@ -14,7 +14,9 @@ const StudentLayout = ({ children }: { children: React.ReactNode }) => {
       {student.studentDetail?.isCompleted &&
         !student.studentDetail?.isVerified && <AlertForStudent verifyAlert />}
       {student.studentDetail?.isBlocked && <AlertForStudent blockAlert />}
-      {children}
+      <div className="p-[20px]">
+        <div className="border rounded-md">{children}</div>
+      </div>
     </div>
   );
 };

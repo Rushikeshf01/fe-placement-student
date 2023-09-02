@@ -31,47 +31,45 @@ const StudentCompany = () => {
   };
 
   return (
-    <div className="p-[20px]">
-      <div className="border rounded-md">
-        <table className="w-full">
-          <thead>
-            <tr className="bg-red-100">
-              <th className="p-2">Name</th>
-              <th className="p-2">Website</th>
-              <th className="p-2">Location</th>
-              <th className="p-2">Deadline</th>
-              <th className="p-2">More info</th>
+    <>
+      <table className="w-full">
+        <thead>
+          <tr className="bg-red-100">
+            <th className="p-2">Name</th>
+            <th className="p-2">Website</th>
+            <th className="p-2">Location</th>
+            <th className="p-2">Deadline</th>
+            <th className="p-2">More info</th>
+          </tr>
+        </thead>
+        <tbody>
+          {data.map((item, index) => (
+            <tr key={`company-item-index:${index}`} className="text-center">
+              <td className="p-2">{item.name}</td>
+              <td className="p-2">{item.website}</td>
+              <td className="p-2">{item.location}</td>
+              <td className="p-2">{item.deadline}</td>
+              <td className="p-2">
+                <Info
+                  onClick={() => handleClickCompanyInfo(item.id)}
+                  className="text-2xl cursor-pointer"
+                />
+              </td>
             </tr>
-          </thead>
-          <tbody>
-            {data.map((item, index) => (
-              <tr key={`company-item-index:${index}`} className="text-center">
-                <td className="p-2">{item.name}</td>
-                <td className="p-2">{item.website}</td>
-                <td className="p-2">{item.location}</td>
-                <td className="p-2">{item.deadline}</td>
-                <td className="p-2">
-                  <Info
-                    onClick={() => handleClickCompanyInfo(item.id)}
-                    className="text-2xl cursor-pointer"
-                  />
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-        <Divider className="mt-2" />
-        <TablePagination
-          component="div"
-          count={15}
-          page={page}
-          onPageChange={handleChangePage}
-          rowsPerPage={rowsPerPage}
-          rowsPerPageOptions={[5, 10, 15]}
-          onRowsPerPageChange={handleChangeRowsPerPage}
-        />
-      </div>
-    </div>
+          ))}
+        </tbody>
+      </table>
+      <Divider className="mt-2" />
+      <TablePagination
+        component="div"
+        count={15}
+        page={page}
+        onPageChange={handleChangePage}
+        rowsPerPage={rowsPerPage}
+        rowsPerPageOptions={[5, 10, 15]}
+        onRowsPerPageChange={handleChangeRowsPerPage}
+      />
+    </>
   );
 };
 

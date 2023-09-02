@@ -1,6 +1,7 @@
 "use client";
 
 import { ApplicationConstant } from "@/constant/applicationConstant";
+import StudentProfile from "@/module/studentProfile/StudentProfile";
 import { RootState } from "@/store/store";
 import { useRouter } from "next/navigation";
 import React, { useEffect } from "react";
@@ -19,7 +20,7 @@ const StudentProfilePage = () => {
     }
   }, []);
 
-  return <div>StudentProfilePage</div>;
+  return <StudentProfile />;
 };
 
 export default StudentProfilePage;
