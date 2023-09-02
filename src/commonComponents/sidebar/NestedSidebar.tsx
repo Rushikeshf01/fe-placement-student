@@ -1,23 +1,21 @@
 import Link from "next/link";
-import { NestedSidebarProps } from "@/utils/types"
+import { NestedSidebarProps } from "@/utils/types";
 
-const NestedSlidebar = (props: NestedSidebarProps) => {
+const NestedSlidebar = (props: { subRoutes: NestedSidebarProps[] }) => {
+  return (
+    <>
+      {props.subRoutes.map((item, index) => (
+        <div key={`sidebar-nested-route-index:${index}`}>
+          <Link
+            href={item.path}
+            className="block m-2 ml-5 p-2 text-center hover:bg-gray-300 hover:rounded-md"
+          >
+            {item.state}
+          </Link>
+        </div>
+      ))}
+    </>
+  );
+};
 
-    return (
-        <>
-        {props.subRoutes.map((route, index) => (
-            <div key={index}>
-                <Link
-                    href={route.path}
-                    className="flex flex-row my-4 mx-12 p-2.5 rounded-xl hover:bg-gray-400 cursor-pointer" key={index}>
-                    <p className="flex pl-2.5 w-full justify-between">
-                        {route.state}
-                    </p>
-                </Link>
-            </div>
-        ))}
-        </>
-    )
-}
-
-export default NestedSlidebar
+export default NestedSlidebar;
