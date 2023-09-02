@@ -4,7 +4,7 @@ import { FacultyProfileType } from "@/utils/types";
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 
-export const initialState: FacultyProfileType = {
+export const initialFacultyState: FacultyProfileType = {
   id: "",
   firstName: "",
   lastName: "",
@@ -17,7 +17,7 @@ export const initialState: FacultyProfileType = {
 
 export const facultySlice = createSlice({
   name: "faculty",
-  initialState,
+  initialState: initialFacultyState,
   reducers: {
     facultyProfile: (state, action: PayloadAction<FacultyProfileType>) => {
       state.id = action.payload.id;
