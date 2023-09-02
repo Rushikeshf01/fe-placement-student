@@ -1,6 +1,7 @@
 "use client";
 
 import { ApplicationConstant } from "@/constant/applicationConstant";
+import StudentCompany from "@/module/studentCompany/StudentCompany";
 import { RootState } from "@/store/store";
 import { UserDetailType } from "@/utils/types";
 import { useRouter } from "next/navigation";
@@ -19,7 +20,7 @@ const StudentPage = () => {
     }
   }, []);
 
-  return <>{authClient.user.isStudent && <div></div>}</>;
+  return <>{authClient.user.isStudent && <StudentCompany />}</>;
 };
 
 export default StudentPage;
