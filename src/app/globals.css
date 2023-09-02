@@ -16,4 +16,13 @@
   }
 }
 
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgb(209 213 219);
+  border-radius: 10px;
+}
+
 body {}
