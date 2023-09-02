@@ -1,6 +1,6 @@
 "use client";
 
-import { IsComplete } from "@/commonComponents/alert/Alerts";
+import { IsCompleteForStudent } from "@/commonComponents/alert/Alerts";
 import { ApplicationConstant } from "@/constant/applicationConstant";
 import { RootState } from "@/store/store";
 import { UserDetailType } from "@/utils/types";
@@ -24,7 +24,9 @@ const StudentPage = () => {
   return (
     <>
       {authClient.user.isStudent && (
-        <div>{!student.studentDetail?.isCompleted && <IsComplete />}</div>
+        <div>
+          {!student.studentDetail?.isCompleted && <IsCompleteForStudent />}
+        </div>
       )}
     </>
   );

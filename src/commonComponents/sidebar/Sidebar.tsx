@@ -76,7 +76,7 @@ const Sidebar = () => {
         <div key={`sidebar-index:${index}`}>
           <Link
             href={item.path ? item.path : ""}
-            className="flex m-2 p-4 hover:bg-gray-300 hover:rounded-md"
+            className="flex m-2 p-3 px-7 hover:bg-gray-200 hover:rounded-md"
           >
             {item.icon}
             <p className="mx-2 ">{item.state}</p>

@@ -1,5 +1,6 @@
 "use client";
 
+import { IsCompleteForFaculty } from "@/commonComponents/alert/Alerts";
 import { ApplicationConstant } from "@/constant/applicationConstant";
 import { RootState } from "@/store/store";
 import { UserDetailType } from "@/utils/types";
@@ -11,6 +12,7 @@ const FacultyPage = () => {
   const authClient: UserDetailType = useSelector(
     (state: RootState) => state.auth
   );
+  const faculty = useSelector((state: RootState) => state.faculty);
   const router = useRouter();
 
   useEffect(() => {
@@ -19,7 +21,15 @@ const FacultyPage = () => {
     }
   }, []);
 
-  return <>{authClient.user.isStaff && <div>FacultyPage</div>}</>;
+  return (
+    <>
+      {authClient.user.isStaff && (
+        <div>
+          {!faculty.facultyDetail?.isCompleted && <IsCompleteForFaculty />}
+        </div>
+      )}
+    </>
+  );
 };
 
 export default FacultyPage;

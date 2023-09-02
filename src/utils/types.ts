@@ -82,6 +82,7 @@ export interface FacultyProfileType {
     createdAt: string;
     updatedAt: string;
     facultyId: string;
+    isCompleted: boolean;
   } | null;
   mobile: string;
   email: string;

@@ -8,7 +8,7 @@ const NestedSlidebar = (props: { subRoutes: NestedSidebarProps[] }) => {
         <div key={`sidebar-nested-route-index:${index}`}>
           <Link
             href={item.path}
-            className="block m-2 ml-5 p-2 text-center hover:bg-gray-300 hover:rounded-md"
+            className="block m-2 ml-6 p-2 text-center hover:bg-gray-200 hover:rounded-md"
           >
             {item.state}
           </Link>
