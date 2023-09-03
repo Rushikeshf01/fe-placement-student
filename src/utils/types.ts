@@ -101,3 +101,24 @@ export interface NestedSidebarProps {
   path: string;
   state: string;
 }
+
+export interface CompanyDetailListType {
+  count: number;
+  next: string | null;
+  previous: string | null;
+  results: {
+    id: string;
+    name: string;
+    location: string;
+    website: string;
+    deadline: string;
+    description: string;
+    isClosed: boolean;
+    updatedAt: string;
+    companyDocument: {
+      id: string;
+      document: string;
+      updatedAt: string;
+    }[];
+  }[];
+}

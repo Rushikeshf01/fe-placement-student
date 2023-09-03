@@ -30,4 +30,7 @@ export const ApiConstant = {
 
   // faculty url
   GET_FACULTY_PROFILE: "faculty/profile/",
+
+  // company url
+  GET_COMPANY_DETAIL: "company/details/"
 };
