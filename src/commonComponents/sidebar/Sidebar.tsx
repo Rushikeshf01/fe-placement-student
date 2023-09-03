@@ -64,7 +64,7 @@ const Sidebar = () => {
   const authClient = useSelector((state: RootState) => state.auth.user);
 
   return (
-    <div className="h-screen w-full p-2 bg-gray-100 z-10">
+    <div className="fixed left-0 w-[200px] h-screen p-2 bg-gray-100">
       {authClient.isStudent &&
         studentSidebarRoutes.map((item, index) => (
           <SidebarItem key={`sidebar-item-index:${index}`} item={item} />

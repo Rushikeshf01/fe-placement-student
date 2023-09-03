@@ -11,7 +11,7 @@ import Sidebar from "@/commonComponents/sidebar/Sidebar";
 import Navbar from "@/commonComponents/navbar/Navbar";
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
-  const [toggleSidebar, setToggleSidebar] = useState(false);
+  const [toggleSidebar, setToggleSidebar] = useState(true);
   const dispatch = useDispatch();
   const user = useSelector((state: RootState) => state.auth.user);
 
@@ -41,9 +41,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
     <>
       <Navbar showHideSidebar={showHideSidebar} />
       <div
-        className={`grid ${
-          toggleSidebar ? "grid-cols-[max-content_auto]" : "grid-cols-1"
-        }`}
+        className="mt-[70px] ml-[200px]"
       >
         {toggleSidebar && <Sidebar />}
         {children}

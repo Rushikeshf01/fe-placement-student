@@ -1,7 +1,7 @@
 import { ApplicationConstant } from "@/constant/applicationConstant";
 import { CompanyDetailListType } from "@/utils/types";
 import { Info, Launch } from "@mui/icons-material";
-import { Chip } from "@mui/material";
+import { Chip, Tooltip } from "@mui/material";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React from "react";
@@ -39,10 +39,12 @@ const StudentCompanyBody = (props: {
             )}
           </td>
           <td className="p-2">
-            <Info
-              onClick={() => handleClickCompanyInfo(item.id)}
-              className="text-2xl cursor-pointer"
-            />
+            <Tooltip title="More info" placement="right">
+              <Info
+                onClick={() => handleClickCompanyInfo(item.id)}
+                className="text-2xl cursor-pointer"
+              />
+            </Tooltip>
           </td>
         </tr>
       ))}

@@ -21,7 +21,7 @@ const Navbar = (props: { showHideSidebar: any }) => {
   };
 
   return (
-    <div className="flex justify-between items-center shadow-lg	px-[20px] py-[15px]">
+    <div className="fixed w-full top-0 flex justify-between items-center px-[20px] py-[15px] bg-white shadow-md z-10">
       <Tooltip title="Menu" placement="right">
         <MenuRounded
           className="cursor-pointer text-4xl"
