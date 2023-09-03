@@ -13,19 +13,19 @@ const StudentProfile = () => {
   return (
     <>
       <div>
-        <p className="m-3 text-xl font-semibold">Account Detail</p>
+        <p className="m-3 text-xl font-semibold">ACCOUNT DETAIL</p>
       </div>
       <Divider />
       <div>
-        <p className="m-3 text-xl font-semibold">Personal Detail</p>
+        <p className="m-3 text-xl font-semibold">PERSONAL DETAIL</p>
       </div>
       <Divider />
       <div>
-        <p className="m-3 text-xl font-semibold">College Detail</p>
+        <p className="m-3 text-xl font-semibold">COLLEGE DETAIL</p>
       </div>
       <Divider />
       <div>
-        <p className="m-3 text-xl font-semibold">School Detail</p>
+        <p className="m-3 text-xl font-semibold">SCHOOL DETAIL</p>
       </div>
     </>
   );
