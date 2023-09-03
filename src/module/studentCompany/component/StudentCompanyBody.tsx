@@ -1,6 +1,6 @@
 import { ApplicationConstant } from "@/constant/applicationConstant";
 import { CompanyDetailListType } from "@/utils/types";
-import { Info } from "@mui/icons-material";
+import { Info, Launch } from "@mui/icons-material";
 import { Chip } from "@mui/material";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -25,7 +25,8 @@ const StudentCompanyBody = (props: {
           <td className="p-2">{item.name}</td>
           <td className="p-2">
             <Link href={item.website} target="_blank">
-              Open Link
+              Open
+              <Launch fontSize="small" />
             </Link>
           </td>
           <td className="p-2">{item.location}</td>

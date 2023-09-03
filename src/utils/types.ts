@@ -106,19 +106,21 @@ export interface CompanyDetailListType {
   count: number;
   next: string | null;
   previous: string | null;
-  results: {
+  results: SingleCompanyItemType[];
+}
+
+export interface SingleCompanyItemType {
+  id: string;
+  name: string;
+  location: string;
+  website: string;
+  deadline: string;
+  description: string;
+  isClosed: boolean;
+  updatedAt: string;
+  companyDocument: {
     id: string;
-    name: string;
-    location: string;
-    website: string;
-    deadline: string;
-    description: string;
-    isClosed: boolean;
+    document: string;
     updatedAt: string;
-    companyDocument: {
-      id: string;
-      document: string;
-      updatedAt: string;
-    }[];
   }[];
 }
