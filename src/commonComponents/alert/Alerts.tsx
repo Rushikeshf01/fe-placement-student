@@ -45,6 +45,14 @@ export const AlertForFaculty = (props: { completeAlert?: boolean }) => {
   );
 };
 
+export const NotAvailable = (props: { label?: string }) => {
+  return (
+    <div className="p-3 text-red-400 font-medium">
+      {props.label ? props.label : "Details"} not available
+    </div>
+  );
+};
+
 const IsCompleteForStudent = (props: { name: string }) => {
   return (
     <div className="w-full flex justify-between p-2 text-white bg-red-500">
