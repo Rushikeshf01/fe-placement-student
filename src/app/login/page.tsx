@@ -17,11 +17,12 @@ export default function RegisterPage() {
   const getAuthenticationStatus = async () => {
     const status = await initializeAuthData();
     if (status) {
-      if (pathName.match("/dashbaord")) {
-        router.back();
-      } else {
-        router.push(ApplicationConstant.DASHBOARD_PATH);
-      }
+      console.log(pathName);
+      // if (pathName.match("/login")) {
+      router.back();
+      // } else {
+      // router.push(ApplicationConstant.DASHBOARD_PATH);
+      // }
     } else {
       router.push(ApplicationConstant.LOGIN_PATH);
     }
