@@ -6,6 +6,7 @@ import authClient from "@/network/authClient";
 import { CompanyDetailListType } from "@/utils/types";
 import { Info } from "@mui/icons-material";
 import { Chip, Divider, TablePagination } from "@mui/material";
+import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
 const StudentCompany = () => {
@@ -14,6 +15,8 @@ const StudentCompany = () => {
   const [count, setCount] = useState(0);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
+
+  const router = useRouter();
 
   useEffect(() => {
     getCompanyList();
@@ -44,7 +47,7 @@ const StudentCompany = () => {
   };
 
   const handleClickCompanyInfo = (id: string) => {
-    // Push student to /dashboard/student/company/:id
+    router.push(`${ApplicationConstant.STUDENT_COMPANY_PATH}/${id}`);
   };
 
   return (
