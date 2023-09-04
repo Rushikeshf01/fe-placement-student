@@ -4,7 +4,7 @@ import { UserDetailType } from "@/utils/types";
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 
-export const initialState: UserDetailType = {
+export const initialUserState: UserDetailType = {
   refresh: "",
   access: "",
   isAuthenticated: false,
@@ -22,9 +22,12 @@ export const initialState: UserDetailType = {
 
 export const loginSlice = createSlice({
   name: "login",
-  initialState,
+  initialState: initialUserState,
   reducers: {
-    initialLoginState: (state, action: PayloadAction<UserDetailType>) => {
+    initialLoginState: (
+      state: UserDetailType,
+      action: PayloadAction<UserDetailType>
+    ) => {
       state.access = action.payload.access;
       state.refresh = action.payload.refresh;
       state.user = action.payload.user;

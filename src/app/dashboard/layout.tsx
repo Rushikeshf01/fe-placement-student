@@ -11,7 +11,7 @@ import Sidebar from "@/commonComponents/sidebar/Sidebar";
 import Navbar from "@/commonComponents/navbar/Navbar";
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
-  const [toggleSidebar, setToggleSidebar] = useState(false);
+  const [toggleSidebar, setToggleSidebar] = useState(true);
   const dispatch = useDispatch();
   const user = useSelector((state: RootState) => state.auth.user);
 
@@ -40,9 +40,11 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
       <Navbar showHideSidebar={showHideSidebar} />
-      <div className="flex">
+      <div
+        className="mt-[70px] ml-[200px]"
+      >
         {toggleSidebar && <Sidebar />}
-        <div>{children}</div>
+        {children}
       </div>
     </>
   );

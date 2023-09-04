@@ -1,13 +1,13 @@
 "use client";
 
 import { ApplicationConstant } from "@/constant/applicationConstant";
-import StudentProfile from "@/module/studentProfile/StudentProfile";
+import StudentSingleCompany from "@/module/studentSingleCompany/StudentSingleCompany";
 import { RootState } from "@/store/store";
 import { useRouter } from "next/navigation";
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 
-const StudentProfilePage = () => {
+const StudentSingleCompanyPage = ({ params }: { params: { companyId: string } }) => {
   const router = useRouter();
 
   const isAuthenticated: boolean = useSelector(
@@ -20,7 +20,7 @@ const StudentProfilePage = () => {
     }
   }, []);
 
-  return <StudentProfile />;
+  return <StudentSingleCompany companyId={params.companyId} />;
 };
 
-export default StudentProfilePage;
+export default StudentSingleCompanyPage;

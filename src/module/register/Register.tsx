@@ -6,12 +6,12 @@ import {
   ApiConstant,
   ApplicationConstant,
 } from "@/constant/applicationConstant";
-import Captcha from "../captcha/Captcha";
 import { joiUtils } from "@/utils/joiValidation";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
 import { RegisterInputType } from "@/utils/types";
 import { ToastErrorMessage, ToastSuccessMessage } from "@/utils/toastifyAlerts";
+import Captcha from "@/commonComponents/captcha/Captcha";
 // import style from "./register.module.css"
 
 const Register = () => {
@@ -57,7 +57,7 @@ const Register = () => {
       password: userInput.password,
       isStudent: true,
     });
-    ToastSuccessMessage("Registration successfull")
+    ToastSuccessMessage("Registration successfull");
   };
 
   return (
@@ -131,10 +131,7 @@ const Register = () => {
       </Button>
       <div className="mt-3.5">
         Already have an account?{" "}
-        <Link
-          href={ApplicationConstant.LOGIN_PATH}
-          className="font-semibold"
-        >
+        <Link href={ApplicationConstant.LOGIN_PATH} className="font-semibold">
           Login here
         </Link>
       </div>

@@ -6,8 +6,16 @@ import {
   ApplicationConstant,
 } from "@/constant/applicationConstant";
 import { store } from "@/store/store";
-import { initialLoginState, initialState } from "@/store/slice/loginSlice";
+import { initialLoginState, initialUserState } from "@/store/slice/loginSlice";
 import { ToastErrorMessage, ToastWarningMessage } from "@/utils/toastifyAlerts";
+import {
+  initialStudentState,
+  studentProfile,
+} from "@/store/slice/studentSlice";
+import {
+  facultyProfile,
+  initialFacultyState,
+} from "@/store/slice/facultySlice";
 
 const authClient = axios.create({
   baseURL: ApiConstant.BASE_URL,
@@ -70,7 +78,7 @@ authClient.interceptors.response.use(
 export const initializeAuthData = async () => {
   const refreshToken = localStorage.getItem(ApplicationConstant.REFRESH_TOKEN);
   if (!refreshToken) {
-    store.dispatch(initialLoginState(initialState));
+    setStoreToInitialState();
     return false;
   }
   try {
@@ -87,11 +95,23 @@ export const initializeAuthData = async () => {
     );
     return true;
   } catch {
+    setStoreToInitialState();
     localStorage.clear();
     sessionStorage.clear();
-    store.dispatch(initialLoginState(initialState));
     return false;
   }
+};
+
+export const logoutFunc = () => {
+  setStoreToInitialState();
+  localStorage.clear();
+  sessionStorage.clear();
+};
+
+const setStoreToInitialState = () => {
+  store.dispatch(studentProfile(initialStudentState));
+  store.dispatch(facultyProfile(initialFacultyState));
+  store.dispatch(initialLoginState(initialUserState));
 };
 
 export default authClient;

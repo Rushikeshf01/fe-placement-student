@@ -1,107 +1,123 @@
-"use client"
+"use client";
 
-import React, { useState } from "react"
+import React, { useState } from "react";
 import Link from "next/link";
+import {
+  Business,
+  ExpandLess,
+  ExpandMore,
+  Home,
+  Person,
+} from "@mui/icons-material";
+import { NestedSidebarProps, SidebarRoutesType } from "@/utils/types";
+import { ApplicationConstant } from "@/constant/applicationConstant";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store/store";
 
-import HomeIcon from '@mui/icons-material/Home';
-import DashboardIcon from '@mui/icons-material/Dashboard';
-import PersonIcon from '@mui/icons-material/Person';
-import BusinessIcon from '@mui/icons-material/Business';
-import ApprovalIcon from '@mui/icons-material/Approval';
-import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
-import InfoIcon from '@mui/icons-material/Info';
-import { ExpandLess, ExpandMore } from '@mui/icons-material';
+const studentSidebarRoutes: SidebarRoutesType[] = [
+  {
+    path: ApplicationConstant.STUDENT_DASHBOARD_PATH,
+    state: "Home",
+    icon: <Home />,
+  },
+  {
+    state: "Profile",
+    icon: <Person />,
+    path: ApplicationConstant.STUDENT_PROFILE_PATH,
+  },
+  {
+    path: ApplicationConstant.STUDENT_COMPANY_PATH,
+    state: "Company",
+    icon: <Business />,
+  },
+];
 
-import style from "./sidebar.module.css"
-import { SidebarRoutesType } from "@/utils/types";
-import NestedSidebar from "./NestedSidebar";
+const facultySidebarRoutes: SidebarRoutesType[] = [
+  {
+    path: ApplicationConstant.FACULTY_DASHBOARD_PATH,
+    state: "Home",
+    icon: <Home />,
+  },
+  {
+    state: "Profile",
+    icon: <Person />,
+    path: ApplicationConstant.FACULTY_PROFILE_PATH,
+  },
+  {
+    state: "Company",
+    icon: <Business />,
+    child: [{ state: "Add Company", path: "" }],
+  },
+  // {
+  //   path: "/applied",
+  //   state: "Applied",
+  //   icon: <ApprovalIcon />,
+  // },
+  // {
+  //   path: "/about",
+  //   state: "About",
+  //   icon: <InfoIcon />,
+  // },
+];
 
-const sidebarRoutes: SidebarRoutesType[] = [
-    {
-        path: "/home",
-        state: "Home",
-        icon: <HomeIcon />
-    },
-    {
-        path: "/dashboard",
-        state: "Dashboard",
-        icon: <DashboardIcon />
-    },
-    {
-        path: "/dashboard",
-        state: "Student",
-        icon: <PersonIcon />,
-        child: [{
-            path: "/verify-student",
-            state: "Verify Student",
-        },
-        {
-            path: "/show-student",
-            state: "Show Student",
-        }],
-    },
-    {
-        path: "/company",
-        state: "Company's",
-        icon: <BusinessIcon />
-    },
-    {
-        path: "/applied",
-        state: "Applied",
-        icon: <ApprovalIcon />
-    },
-    {
-        path: "/placed",
-        state: "Placed",
-        icon: <PeopleAltIcon />
-    },
-    {
-        path: "/about",
-        state: "About",
-        icon: <InfoIcon />
-
-    },
-]
 const Sidebar = () => {
+  const authClient = useSelector((state: RootState) => state.auth.user);
 
-    const [isExpanded, setIsExpanded] = useState(false);
+  return (
+    <div className="fixed left-0 w-[200px] h-screen p-2 bg-gray-100">
+      {authClient.isStudent &&
+        studentSidebarRoutes.map((item, index) => (
+          <SidebarItem key={`sidebar-item-index:${index}`} item={item} />
+        ))}
+      {authClient.isStaff &&
+        facultySidebarRoutes.map((item, index) => (
+          <SidebarItem key={`sidebar-item-index:${index}`} item={item} />
+        ))}
+    </div>
+  );
+};
 
-    const handelNestedRoutes = () => {
-        if (isExpanded) {
-            setIsExpanded(false)
-        }
-        else {
-            setIsExpanded(true)
+const SidebarItem = (props: { item: SidebarRoutesType }) => {
+  const [isExpanded, setIsExpanded] = useState(false);
 
-        }
-    }
+  const handelNestedRoutes = () => {
+    setIsExpanded(!isExpanded);
+  };
 
-    const renderSidebarItems = (items: SidebarRoutesType[]) => {
-        return items.map((route, index) => (
-            <div key={index} className="font-bold">
-                <Link
-                    href={route.path}
-                    className="flex flex-row rounded-xl m-2.5 p-4 hover:bg-gray-400 cursor-pointer">
-                    {route.icon}
-                    <p className="flex pl-2.5 w-full justify-between">
-                        {route.state}
-                        {route.child && (isExpanded ? <ExpandLess onClick={handelNestedRoutes} /> : <ExpandMore onClick={handelNestedRoutes} />)}
-                    </p>
-                </Link>
-                {route.child && isExpanded ? (
-                    <NestedSidebar key={index} subRoutes={route.child} />
-                ) : ""}
-            </div>
-        ));
-    };
+  return (
+    <div>
+      <Link
+        href={props.item.path ? props.item.path : ""}
+        className="flex m-2 p-3 px-7 hover:bg-gray-200 hover:rounded-md"
+      >
+        {props.item.icon}
+        <p className="mx-2 ">{props.item.state}</p>
+        <p onClick={handelNestedRoutes}>
+          {props.item.child && (isExpanded ? <ExpandLess /> : <ExpandMore />)}
+        </p>
+      </Link>
+      {props.item.child && isExpanded && (
+        <NestedSidebar subRoutes={props.item.child} />
+      )}
+    </div>
+  );
+};
 
-
-    return (
-        <div className="flex flex-col h-full w-1/6 rounded-2xl bg-[#dcdbdb] z-10">
-            {renderSidebarItems(sidebarRoutes)}
+const NestedSidebar = (props: { subRoutes: NestedSidebarProps[] }) => {
+  return (
+    <>
+      {props.subRoutes.map((item, index) => (
+        <div key={`sidebar-nested-route-index:${index}`}>
+          <Link
+            href={item.path}
+            className="block m-2 ml-6 p-2 text-center hover:bg-gray-200 hover:rounded-md"
+          >
+            {item.state}
+          </Link>
         </div>
+      ))}
+    </>
+  );
+};
 
-    )
-}
-
-export default Sidebar
+export default Sidebar;
