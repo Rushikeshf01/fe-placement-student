@@ -53,7 +53,7 @@ const StudentCompany = (props: { rowsPerPage: number; isFilterBar?: true }) => {
           getCompanyList={getCompanyList}
         />
       )}
-      {companyDetailList ? (
+      {companyDetailList && companyDetailList.results.length !== 0 ? (
         <>
           <table className="w-full">
             <StudentCompanyHead />
