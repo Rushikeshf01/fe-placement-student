@@ -6,13 +6,15 @@ import React, { useEffect, useState } from "react";
 import StudentCompanyHead from "./component/StudentCompanyHead";
 import StudentCompanyBody from "./component/StudentCompanyBody";
 import { NotAvailable } from "@/commonComponents/alert/Alerts";
+import StudentCompanyFilter from "./component/StudentCompanyFilter";
 
-const StudentCompany = () => {
+const StudentCompany = (props: { rowsPerPage: number; isFilterBar?: true }) => {
   const [companyDetailList, setCompanyDetailList] =
     useState<CompanyDetailListType>();
   const [count, setCount] = useState(0);
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [rowsPerPage, setRowsPerPage] = useState(props.rowsPerPage);
+  const [searchValue, setSearchValue] = useState("");
 
   useEffect(() => {
     getCompanyList();
@@ -22,7 +24,7 @@ const StudentCompany = () => {
     const res = await authClient.get(
       `${ApiConstant.GET_COMPANY_DETAIL}?page=${
         page + 1
-      }&pagesize=${rowsPerPage}&ordering=isClosed`
+      }&pagesize=${rowsPerPage}&search=${searchValue}&ordering=isClosed`
     );
     setCompanyDetailList(res.data);
     setCount(res.data.count);
@@ -44,6 +46,13 @@ const StudentCompany = () => {
 
   return (
     <>
+      {props.isFilterBar && (
+        <StudentCompanyFilter
+          searchValue={searchValue}
+          setSearchValue={setSearchValue}
+          getCompanyList={getCompanyList}
+        />
+      )}
       {companyDetailList ? (
         <>
           <table className="w-full">

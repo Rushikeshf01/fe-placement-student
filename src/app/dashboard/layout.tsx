@@ -40,9 +40,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
       <Navbar showHideSidebar={showHideSidebar} />
-      <div
-        className="mt-[70px] ml-[200px]"
-      >
+      <div className={`mt-[70px] ${toggleSidebar ? "ml-[200px]" : "ml-[0px]"}`}>
         {toggleSidebar && <Sidebar />}
         {children}
       </div>
