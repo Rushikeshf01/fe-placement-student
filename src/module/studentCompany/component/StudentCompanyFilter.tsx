@@ -1,39 +1,101 @@
 import React from "react";
-import { IconButton, InputBase, Paper } from "@mui/material";
+import {
+  FormControl,
+  IconButton,
+  MenuItem,
+  Select,
+  TextField,
+} from "@mui/material";
 import { Search } from "@mui/icons-material";
+
+const filterItem = [
+  {
+    name: "Name (Ascending)",
+    value: "name",
+  },
+  {
+    name: "Name (Descending)",
+    value: "-name",
+  },
+  {
+    name: "Location (Ascending)",
+    value: "location",
+  },
+  {
+    name: "Location (Descending)",
+    value: "-location",
+  },
+  {
+    name: "Status (Ascending)",
+    value: "isClosed",
+  },
+  {
+    name: "Status (Descending)",
+    value: "-isClosed",
+  },
+  {
+    name: "Deadline (Ascending)",
+    value: "deadline",
+  },
+  {
+    name: "Deadline (Descending)",
+    value: "-deadline",
+  },
+];
 
 const StudentCompanyFilter = (props: {
   searchValue: string;
+  filterValue: string;
   getCompanyList: any;
   setSearchValue: any;
+  setFilterValue: any;
 }) => {
-  const handleSearchValueClick = () => {
-    props.getCompanyList();
-  };
-
   const handleSearchValueChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.currentTarget;
     props.setSearchValue(value);
   };
 
+  const handleFilterValueChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const { value } = e.target;
+    props.setFilterValue(value);
+  };
+
   return (
-    <div className="m-2">
-      <Paper component="form" className="flex items-center p-[3px] rounded-sm">
-        <InputBase
-          value={props.searchValue}
-          onChange={handleSearchValueChange}
-          name="searchValue"
-          className="ml-1 flex-1"
-          placeholder="Search Comapny Name, Description, Website, Location"
-        />
-        <IconButton
-          onClick={handleSearchValueClick}
-          type="button"
-          className="p-[10px]"
+    <div className="m-2 flex items-center">
+      <TextField
+        value={props.searchValue}
+        onChange={handleSearchValueChange}
+        name="searchValue"
+        className="w-[35%] mr-4"
+        InputProps={{
+          endAdornment: (
+            <IconButton
+              onClick={() => props.getCompanyList()}
+              type="button"
+              size="small"
+            >
+              <Search />
+            </IconButton>
+          ),
+        }}
+        size="small"
+        placeholder="Search Name, Description, Website, Location"
+      />
+      <FormControl size="small">
+        <Select
+          value={props.filterValue}
+          onChange={(e: any) => handleFilterValueChange(e)}
         >
-          <Search />
-        </IconButton>
-      </Paper>
+          {filterItem.map((item, index) => (
+            <MenuItem
+              value={item.value}
+              key={`student-company-list-filter-sorting-index:${index}`}
+            >
+              {item.name}
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl>
     </div>
   );
 };
