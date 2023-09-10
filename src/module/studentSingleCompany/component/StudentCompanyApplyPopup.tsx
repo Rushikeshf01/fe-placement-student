@@ -2,6 +2,7 @@ import { TransitionDown } from "@/commonComponents/Transition";
 import { ApplicationConstant } from "@/constant/applicationConstant";
 import { SingleCompanyItemType } from "@/utils/types";
 import {
+  Button,
   Dialog,
   DialogActions,
   DialogContent,
@@ -40,23 +41,17 @@ const StudentCompanyApplyPopup = (props: {
       >
         <DialogTitle>{`${props.singleCompanyItem.name} Campus Drive`}</DialogTitle>
         <DialogContent>
-          <DialogContentText>
+          <p>
             {`For better responce we recommend apply in ${props.singleCompanyItem.name} with updated resume, if your profile is up to date than ignore this message`}
-          </DialogContentText>
+          </p>
         </DialogContent>
         <DialogActions>
-          <button
-            onClick={handleUpdateProfile}
-            className="p-1 px-5 rounded-full text-white text-md border-2 border-cyan-400 bg-cyan-400 hover:bg-cyan-500"
-          >
+          <Button onClick={handleUpdateProfile} variant="contained">
             Update Profile
-          </button>
-          <button
-            onClick={handleCompanyApply}
-            className="p-1 px-5 rounded-full text-cyan-400 text-md border-2 border-cyan-400 hover:bg-cyan-400 hover:text-white"
-          >
+          </Button>
+          <Button onClick={handleCompanyApply} variant="outlined">
             Apply
-          </button>
+          </Button>
         </DialogActions>
       </Dialog>
       <StudentCompanyApplyInfoPopup

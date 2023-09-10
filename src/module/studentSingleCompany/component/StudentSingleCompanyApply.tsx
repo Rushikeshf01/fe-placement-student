@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { SingleCompanyItemType } from "@/utils/types";
 import { ApplicationConstant } from "@/constant/applicationConstant";
-import { Divider } from "@mui/material";
+import { Button, Divider } from "@mui/material";
 import StudentCompanyApplyPopup from "./StudentCompanyApplyPopup";
 
 const StudentSingleCompanyApply = ({
@@ -20,16 +20,14 @@ const StudentSingleCompanyApply = ({
   return (
     <>
       <Divider className="my-2" />
-      <button
-        className={`${
-          singleCompanyItem.isClosed
-            ? "cursor-not-allowed"
-            : "hover:bg-cyan-500"
-        } p-2 px-8 rounded-full text-white text-md font-semibold bg-cyan-400`}
+      <Button
+        className={singleCompanyItem.isClosed ? "cursor-not-allowed" : ""}
+        disabled={singleCompanyItem.isClosed}
         onClick={() => setOpen(!open)}
+        variant="contained"
       >
         Apply
-      </button>
+      </Button>
       <StudentCompanyApplyPopup
         open={open}
         setOpen={setOpen}
