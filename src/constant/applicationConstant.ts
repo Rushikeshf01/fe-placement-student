@@ -15,9 +15,6 @@ export const ApplicationConstant = {
   FACULTY_DASHBOARD_PATH: "/dashboard/faculty",
   FACULTY_PROFILE_PATH: "/dashboard/faculty/profile",
   // FACULTY_COMPANY_PATH: "/dashboard/faculty/company",
-
-  //company apply routes
-  STUDENT_APPLY_PATH: "/dashboard/student/company/[companyId]/apply"
 };
 
 export const ApiConstant = {
