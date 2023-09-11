@@ -2,25 +2,35 @@
 
 import { ParagraphSpan } from "@/commonComponents/Span";
 import { TransitionUp } from "@/commonComponents/Transition";
+import {
+  ApiConstant,
+  ApplicationConstant,
+} from "@/constant/applicationConstant";
+import appClient from "@/network/appClient";
 import { RootState } from "@/store/store";
+import { ToastSuccessMessage } from "@/utils/toastifyAlerts";
 import { Close } from "@mui/icons-material";
 import {
   AppBar,
+  Button,
   Dialog,
   DialogContent,
   IconButton,
   Toolbar,
   Typography,
 } from "@mui/material";
-import React, { useState } from "react";
+import { useRouter } from "next/navigation";
+import React from "react";
 import { useSelector } from "react-redux";
 
 const StudentCompanyApplyInfoPopup = (props: {
   companyName: string;
+  companyId: string;
   open: boolean;
   setOpen: any;
 }) => {
   const student = useSelector((state: RootState) => state.student);
+  const router = useRouter();
 
   const studentApplyInfo = [
     {
@@ -97,6 +107,18 @@ const StudentCompanyApplyInfoPopup = (props: {
     props.setOpen(false);
   };
 
+  const handleSubmit = async () => {
+    const res = await appClient.post(ApiConstant.POST_APPLICATION, {
+      // status: "applied",
+      studentId: student.studentDetail?.id,
+      companyId: props.companyId,
+    });
+    ToastSuccessMessage(
+      `Your application in ${props.companyName} successfully submited`
+    );
+    router.push(ApplicationConstant.STUDENT_DASHBOARD_PATH);
+  };
+
   return (
     <Dialog
       fullScreen
@@ -115,7 +137,7 @@ const StudentCompanyApplyInfoPopup = (props: {
         </Toolbar>
       </AppBar>
       <DialogContent>
-        <div>
+        <div className="leading-8 mb-3">
           {studentApplyInfo.map((item, index) => (
             <ParagraphSpan
               title={item.title}
@@ -125,6 +147,9 @@ const StudentCompanyApplyInfoPopup = (props: {
             />
           ))}
         </div>
+        <Button onClick={handleSubmit} variant="outlined">
+          Submit
+        </Button>
       </DialogContent>
     </Dialog>
   );

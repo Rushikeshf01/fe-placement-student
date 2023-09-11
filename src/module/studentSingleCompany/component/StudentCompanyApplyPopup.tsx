@@ -1,3 +1,5 @@
+"use client";
+
 import { TransitionDown } from "@/commonComponents/Transition";
 import { ApplicationConstant } from "@/constant/applicationConstant";
 import { SingleCompanyItemType } from "@/utils/types";
@@ -58,6 +60,7 @@ const StudentCompanyApplyPopup = (props: {
         open={openApplyInfoPopup}
         setOpen={setOpenApplyInfoPopup}
         companyName={props.singleCompanyItem.name}
+        companyId={props.singleCompanyItem.id}
       />
     </>
   );
