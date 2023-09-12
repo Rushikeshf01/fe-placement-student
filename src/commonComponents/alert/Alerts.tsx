@@ -1,5 +1,6 @@
+import { ApplicationConstant } from "@/constant/applicationConstant";
 import { RootState } from "@/store/store";
-import { Close } from "@mui/icons-material";
+import Link from "next/link";
 import React from "react";
 import { useSelector } from "react-redux";
 
@@ -55,50 +56,42 @@ export const NotAvailable = (props: { label?: string }) => {
 
 const IsCompleteForStudent = (props: { name: string }) => {
   return (
-    <div className="w-full flex justify-between p-2 text-white bg-red-500">
-      <div className="p-3">
-        <span className="font-semibold">{props.name}</span> your profile is
-        pending, please complete it as soon as possible and send it to college
-        placement team for verification.
-      </div>
-      <Close className="cursor-pointer" />
+    <div className="w-full p-5 text-white bg-red-500">
+      <span className="font-semibold">{props.name}</span> your profile is
+      pending, please complete it as soon as possible.{" "}
+      <u>
+        <Link href={ApplicationConstant.STUDENT_PROFILE_PATH}>
+          Click here to complete
+        </Link>
+      </u>
     </div>
   );
 };
 
 const IsVerifyForStudent = (props: { name: string }) => {
   return (
-    <div className="w-full flex justify-between p-2 text-white bg-yellow-500">
-      <div className="p-3">
-        <span className="font-semibold">{props.name}</span> your profile is not
-        verified yet, please wait for verification after that you are eligible
-        to participate in campus drives.
-      </div>
-      <Close className="cursor-pointer" />
+    <div className="w-full p-5 text-white bg-yellow-500">
+      <span className="font-semibold">{props.name}</span> your profile is not
+      verified yet, please wait for verification after that you are eligible to
+      participate in campus drives.
     </div>
   );
 };
 
 const IsBlockForStudent = (props: { name: string }) => {
   return (
-    <div className="w-full flex justify-between p-2 text-white bg-red-500">
-      <div className="p-3">
-        <span className="font-semibold">{props.name}</span> your profile is
-        blocked by TPO cell, please contact TPO cell to unblock your profile.
-      </div>
-      <Close className="cursor-pointer" />
+    <div className="w-full p-5 text-white bg-red-500">
+      <span className="font-semibold">{props.name}</span> your profile is
+      blocked by TPO cell, please contact TPO cell to unblock your profile.
     </div>
   );
 };
 
 const IsCompleteForFaculty = (props: { name: string }) => {
   return (
-    <div className="w-full flex justify-between p-2 text-white bg-red-500">
-      <div className="p-3">
-        <span className="font-semibold">{props.name}</span> your profile is
-        pending, please complete it as soon as possible.
-      </div>
-      <Close className="cursor-pointer" />
+    <div className="w-full p-5 text-white bg-red-500">
+      <span className="font-semibold">{props.name}</span> your profile is
+      pending, please complete it as soon as possible.
     </div>
   );
 };
