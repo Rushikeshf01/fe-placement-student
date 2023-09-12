@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { Divider } from "@mui/material";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
+import StudentAccountDetail from "./component/StudentAccountDetail";
 
 const StudentProfile = () => {
-  const [studentAccountDetail, setStudentAccountDetail] = useState();
   const [studentPersonalDetail, setStudentPersonalDetail] = useState();
   const [studentCollegeDetail, setStudentCollegeDetail] = useState();
   const [studentSchoolDetail, setStudentSchoolDetail] = useState();
@@ -14,6 +14,7 @@ const StudentProfile = () => {
     <>
       <div>
         <p className="m-3 text-xl font-semibold">Account Detail</p>
+        <StudentAccountDetail />
       </div>
       <Divider />
       <div>
