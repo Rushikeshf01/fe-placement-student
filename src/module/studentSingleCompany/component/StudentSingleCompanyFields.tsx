@@ -12,14 +12,23 @@ const StudentSingleCompanyFields = ({
     <>
       <Divider className="my-2" />
       <p>
-        Company&apos;s website:{" "}
-        <Link href={singleCompanyItem.website}>
+        <span className="font-semibold">Company&apos;s website: </span>
+        <Link href={singleCompanyItem.website} target="_blank">
           <u>{singleCompanyItem.website}</u>
         </Link>
       </p>
-      <p>Company&apos;s location: {singleCompanyItem.location}</p>
-      <p>Application deadline: {singleCompanyItem.deadline}</p>
-      <p>Company&apos;s description: {singleCompanyItem.description}</p>
+      <p>
+        <span className="font-semibold">Company&apos;s location: </span>
+        {singleCompanyItem.location}
+      </p>
+      <p>
+        <span className="font-semibold">Application deadline: </span>
+        {singleCompanyItem.deadline}
+      </p>
+      <p>
+        <span className="font-semibold">Company&apos;s description: </span>
+        {singleCompanyItem.description}
+      </p>
     </>
   );
 };

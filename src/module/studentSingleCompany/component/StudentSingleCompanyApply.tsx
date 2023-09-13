@@ -1,33 +1,38 @@
-import { ApplicationConstant } from "@/constant/applicationConstant";
+"use client";
+
+import React, { useState } from "react";
 import { SingleCompanyItemType } from "@/utils/types";
-import { Divider } from "@mui/material";
-import { useRouter, usePathname } from "next/navigation";
-import React from "react";
+import { Button, Divider } from "@mui/material";
+import StudentCompanyApplyPopup from "./StudentCompanyApplyPopup";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store/store";
 
 const StudentSingleCompanyApply = ({
   singleCompanyItem,
 }: {
   singleCompanyItem: SingleCompanyItemType;
 }) => {
-  const router = useRouter();
-  const path = usePathname();
-  const handleApply = () => {
-    console.log(`${path}/apply`);
-    router.push(`${path}/apply`);
-  }
+  const [open, setOpen] = useState(false);
+  const isComplete = useSelector((state: RootState) => state.student.studentDetail?.isCompleted);
+  const isVerified = useSelector((state: RootState) => state.student.studentDetail?.isVerified);
+  const isBlocked = useSelector((state: RootState) => state.student.studentDetail?.isBlocked);
+
   return (
     <>
       <Divider className="my-2" />
-      <button
-        className={`${
-          singleCompanyItem.isClosed
-            ? "cursor-not-allowed"
-            : "hover:bg-cyan-500"
-        } p-2 px-8 rounded-full text-white text-md font-semibold bg-cyan-400`}
-        onClick = {handleApply}
+      <Button
+        className={singleCompanyItem.isClosed ? "cursor-not-allowed" : ""}
+        disabled={singleCompanyItem.isClosed || isBlocked || !isComplete || !isVerified}
+        onClick={() => setOpen(!open)}
+        variant="contained"
       >
         Apply
-      </button>
+      </Button>
+      <StudentCompanyApplyPopup
+        open={open}
+        setOpen={setOpen}
+        singleCompanyItem={singleCompanyItem}
+      />
     </>
   );
 };

@@ -1,67 +1,54 @@
+import React, { useEffect, useState } from "react";
 import { ApiConstant } from "@/constant/applicationConstant";
 import authClient from "@/network/authClient";
 import { CompanyDetailListType } from "@/utils/types";
-import { Divider, TablePagination } from "@mui/material";
-import React, { useEffect, useState } from "react";
-import StudentCompanyHead from "./component/StudentCompanyHead";
-import StudentCompanyBody from "./component/StudentCompanyBody";
 import { NotAvailable } from "@/commonComponents/alert/Alerts";
+import StudentCompanyHead from "./component/StudentCompanyHead";
+import StudentCompanyFilter from "./component/StudentCompanyFilter";
 
-const StudentCompany = () => {
+const StudentCompany = (props: { rowsPerPage: number; isFilterBar?: true }) => {
   const [companyDetailList, setCompanyDetailList] =
     useState<CompanyDetailListType>();
   const [count, setCount] = useState(0);
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [rowsPerPage, setRowsPerPage] = useState(props.rowsPerPage);
+  const [searchValue, setSearchValue] = useState("");
+  const [filterValue, setFilterValue] = useState("isClosed");
 
   useEffect(() => {
     getCompanyList();
-  }, [page, rowsPerPage]);
+  }, [page, rowsPerPage, filterValue]);
 
   const getCompanyList = async () => {
     const res = await authClient.get(
       `${ApiConstant.GET_COMPANY_DETAIL}?page=${
         page + 1
-      }&pagesize=${rowsPerPage}&ordering=isClosed`
+      }&pagesize=${rowsPerPage}&search=${searchValue}&ordering=${filterValue}`
     );
     setCompanyDetailList(res.data);
     setCount(res.data.count);
   };
 
-  const handleChangePage = (
-    event: React.MouseEvent<HTMLButtonElement> | null,
-    newPage: number
-  ) => {
-    setPage(newPage);
-  };
-
-  const handleChangeRowsPerPage = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    setRowsPerPage(parseInt(event.target.value));
-    setPage(0);
-  };
-
   return (
     <>
-      {companyDetailList ? (
-        <>
-          <table className="w-full">
-            <StudentCompanyHead />
-            <StudentCompanyBody companyDetailList={companyDetailList} />
-          </table>
-          <Divider className="mt-2" />
-          <TablePagination
-            component="div"
-            count={count}
-            page={page}
-            onPageChange={handleChangePage}
-            rowsPerPage={rowsPerPage}
-            rowsPerPageOptions={[5, 10, 15]}
-            onRowsPerPageChange={handleChangeRowsPerPage}
-            className="mx-2"
-          />
-        </>
+      {props.isFilterBar && (
+        <StudentCompanyFilter
+          searchValue={searchValue}
+          filterValue={filterValue}
+          setSearchValue={setSearchValue}
+          setFilterValue={setFilterValue}
+          getCompanyList={getCompanyList}
+        />
+      )}
+      {companyDetailList && companyDetailList.results.length !== 0 ? (
+        <StudentCompanyHead
+          companyDetailList={companyDetailList}
+          count={count}
+          page={page}
+          rowsPerPage={rowsPerPage}
+          setPage={setPage}
+          setRowsPerPage={setRowsPerPage}
+        />
       ) : (
         <NotAvailable label="Company details" />
       )}

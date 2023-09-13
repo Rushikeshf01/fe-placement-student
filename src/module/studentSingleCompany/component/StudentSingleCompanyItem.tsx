@@ -11,10 +11,10 @@ const StudentSingleCompanyItem = ({
   singleCompanyItem: SingleCompanyItemType;
 }) => {
   return (
-    <div className="p-2 leading-7">
+    <div className="p-2 leading-8">
       <div className="flex items-center">
         <p className="text-xl mr-2 font-semibold">
-          {`${singleCompanyItem.name.toUpperCase()} CAMPUS DRIVE`}
+          {`${singleCompanyItem.name.toUpperCase()} Campus Drive`}
         </p>
         <Chip
           label={singleCompanyItem.isClosed ? "Closed" : "Open"}

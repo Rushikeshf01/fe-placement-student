@@ -15,16 +15,14 @@ export const ApplicationConstant = {
   FACULTY_DASHBOARD_PATH: "/dashboard/faculty",
   FACULTY_PROFILE_PATH: "/dashboard/faculty/profile",
   // FACULTY_COMPANY_PATH: "/dashboard/faculty/company",
-
-  //company apply routes
-  STUDENT_APPLY_PATH: "/dashboard/student/company/[companyId]/apply"
 };
 
 export const ApiConstant = {
   BASE_URL: "http://127.0.0.1:8000/",
 
   // account url
-  POST_NEW_USER: "account/user/signup/",
+  POST_NEW_USER: "account/user/post/",
+  UPDATE_NEW_USER: "account/user/update/",
   AUTHENTICATE_USER: "account/user/token/",
   GET_NEW_ACCESS_TOKEN: "account/user/token/refresh/",
 
@@ -35,5 +33,8 @@ export const ApiConstant = {
   GET_FACULTY_PROFILE: "faculty/profile/",
 
   // company url
-  GET_COMPANY_DETAIL: "company/details/"
+  GET_COMPANY_DETAIL: "company/profile/",
+
+  // placement url
+  POST_APPLICATION: "placement/apply/",
 };
