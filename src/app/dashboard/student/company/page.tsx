@@ -20,7 +20,7 @@ const StudentCompanyPage = () => {
     }
   }, []);
 
-  return <StudentCompany rowsPerPage={10} isFilterBar />;
+  return <StudentCompany rowsPerPage={10} isFilterBar isClosed="True" />;
 };
 
 export default StudentCompanyPage;

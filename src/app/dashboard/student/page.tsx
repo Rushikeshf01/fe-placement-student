@@ -20,7 +20,7 @@ const StudentPage = () => {
     }
   }, []);
 
-  return <StudentCompany rowsPerPage={5} />;
+  return <StudentCompany rowsPerPage={5} isClosed="False" />;
 };
 
 export default StudentPage;

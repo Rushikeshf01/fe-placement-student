@@ -6,7 +6,11 @@ import { NotAvailable } from "@/commonComponents/alert/Alerts";
 import StudentCompanyHead from "./component/StudentCompanyHead";
 import StudentCompanyFilter from "./component/StudentCompanyFilter";
 
-const StudentCompany = (props: { rowsPerPage: number; isFilterBar?: true }) => {
+const StudentCompany = (props: {
+  rowsPerPage: number;
+  isFilterBar?: true;
+  isClosed: string;
+}) => {
   const [companyDetailList, setCompanyDetailList] =
     useState<CompanyDetailListType>();
   const [count, setCount] = useState(0);
@@ -23,7 +27,9 @@ const StudentCompany = (props: { rowsPerPage: number; isFilterBar?: true }) => {
     const res = await authClient.get(
       `${ApiConstant.GET_COMPANY_DETAIL}?page=${
         page + 1
-      }&pagesize=${rowsPerPage}&search=${searchValue}&ordering=${filterValue}`
+      }&pagesize=${rowsPerPage}&search=${searchValue}&ordering=${filterValue}&isClosed=${
+        props.isClosed
+      }`
     );
     setCompanyDetailList(res.data);
     setCount(res.data.count);
