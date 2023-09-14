@@ -5,6 +5,7 @@ import { RootState } from "@/store/store";
 import StudentAccountDetail from "./component/StudentAccountDetail";
 import StudentPersonalDetail from "./component/StudentPersonalDetail";
 import StudentCollegeDetail from "./component/StudentCollegeDetail";
+import StudentSchoolDetail from "./component/StudentSchoolDetail";
 
 const StudentProfile = () => {
   const [studentPersonalDetail, setStudentPersonalDetail] = useState();
@@ -31,6 +32,7 @@ const StudentProfile = () => {
       <Divider />
       <div>
         <p className="m-3 text-xl font-semibold">School Detail</p>
+        <StudentSchoolDetail />
       </div>
     </>
   );
