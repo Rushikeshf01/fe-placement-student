@@ -50,19 +50,23 @@ const Login = () => {
       email: loginInputState.email,
       password: loginInputState.password,
     });
-    dispatch(
-      initialLoginState({
-        access: response.data.access,
-        refresh: response.data.refresh,
-        user: response.data.user,
-        isAuthenticated: true,
-      })
-    );
-    localStorage.setItem(
-      ApplicationConstant.REFRESH_TOKEN,
-      response.data.refresh
-    );
-    router.push(ApplicationConstant.DASHBOARD_PATH);
+    if (response.data.user.isStudent) {
+      dispatch(
+        initialLoginState({
+          access: response.data.access,
+          refresh: response.data.refresh,
+          user: response.data.user,
+          isAuthenticated: true,
+        })
+      );
+      localStorage.setItem(
+        ApplicationConstant.REFRESH_TOKEN,
+        response.data.refresh
+      );
+      router.push(ApplicationConstant.DASHBOARD_PATH);
+    } else {
+      ToastErrorMessage("No active account found with the given credentials");
+    }
   };
 
   return (
