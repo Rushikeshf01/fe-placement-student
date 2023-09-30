@@ -12,7 +12,7 @@ const StudentCompanyBody = (props: {
   const router = useRouter();
 
   const handleClickCompanyInfo = (id: string) => {
-    router.push(`${ApplicationConstant.STUDENT_COMPANY_PATH}/${id}`);
+    router.push(`${ApplicationConstant.COMPANY_PATH}/${id}`);
   };
 
   return (

@@ -4,14 +4,12 @@ import { configureStore } from "@reduxjs/toolkit";
 import authReducer from "./slice/loginSlice";
 import extraReducer from "./slice/extraSlice";
 import studentProfile from "./slice/studentSlice";
-import facultyProfile from "./slice/facultySlice";
 
 export const store = configureStore({
   reducer: {
     auth: authReducer,
     extra: extraReducer,
     student: studentProfile,
-    faculty: facultyProfile,
   },
 });
 

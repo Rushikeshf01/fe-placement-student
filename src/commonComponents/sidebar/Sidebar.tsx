@@ -16,63 +16,28 @@ import { RootState } from "@/store/store";
 
 const studentSidebarRoutes: SidebarRoutesType[] = [
   {
-    path: ApplicationConstant.STUDENT_DASHBOARD_PATH,
+    path: ApplicationConstant.DASHBOARD_PATH,
     state: "Home",
     icon: <Home />,
   },
   {
     state: "Profile",
     icon: <Person />,
-    path: ApplicationConstant.STUDENT_PROFILE_PATH,
+    path: ApplicationConstant.PROFILE_PATH,
   },
   {
-    path: ApplicationConstant.STUDENT_COMPANY_PATH,
+    path: ApplicationConstant.COMPANY_PATH,
     state: "Company",
     icon: <Business />,
   },
-];
-
-const facultySidebarRoutes: SidebarRoutesType[] = [
-  {
-    path: ApplicationConstant.FACULTY_DASHBOARD_PATH,
-    state: "Home",
-    icon: <Home />,
-  },
-  {
-    state: "Profile",
-    icon: <Person />,
-    path: ApplicationConstant.FACULTY_PROFILE_PATH,
-  },
-  {
-    state: "Company",
-    icon: <Business />,
-    child: [{ state: "Add Company", path: "" }],
-  },
-  // {
-  //   path: "/applied",
-  //   state: "Applied",
-  //   icon: <ApprovalIcon />,
-  // },
-  // {
-  //   path: "/about",
-  //   state: "About",
-  //   icon: <InfoIcon />,
-  // },
 ];
 
 const Sidebar = () => {
-  const authClient = useSelector((state: RootState) => state.auth.user);
-
   return (
-    <div className="fixed left-0 w-[200px] h-screen p-2 bg-gray-100">
-      {authClient.isStudent &&
-        studentSidebarRoutes.map((item, index) => (
-          <SidebarItem key={`sidebar-item-index:${index}`} item={item} />
-        ))}
-      {authClient.isStaff &&
-        facultySidebarRoutes.map((item, index) => (
-          <SidebarItem key={`sidebar-item-index:${index}`} item={item} />
-        ))}
+    <div className="fixed left-0 w-[220px] h-screen p-2 bg-gray-100">
+      {studentSidebarRoutes.map((item, index) => (
+        <SidebarItem key={`sidebar-item-index:${index}`} item={item} />
+      ))}
     </div>
   );
 };

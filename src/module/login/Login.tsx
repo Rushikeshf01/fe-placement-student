@@ -67,7 +67,7 @@ const Login = () => {
 
   return (
     <>
-      <p className="mt-6 text-3xl font-bold">Login</p>
+      <p className="mt-6 text-3xl font-bold">Student Login</p>
       <div className="grid grid-cols-2 gap-4 mt-3">
         <TextField
           value={loginInputState.email}

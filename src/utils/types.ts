@@ -69,27 +69,6 @@ export interface StudentProfileType {
   isStaff: boolean;
 }
 
-export interface FacultyProfileType {
-  id: string;
-  firstName: string;
-  lastName: string;
-  facultyDetail: {
-    id: string;
-    address: string;
-    profilePic: string;
-    alternateMobile: string;
-    alternateEmail: string;
-    createdAt: string;
-    updatedAt: string;
-    facultyId: string;
-    isCompleted: boolean;
-  } | null;
-  mobile: string;
-  email: string;
-  isStudent: boolean;
-  isStaff: boolean;
-}
-
 export interface SidebarRoutesType {
   path?: string;
   state: string;

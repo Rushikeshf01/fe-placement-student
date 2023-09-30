@@ -1,8 +1,8 @@
 "use client";
 
 import { ApplicationConstant } from "@/constant/applicationConstant";
-import Faculty from "@/module/faculty/Faculty";
 import Student from "@/module/student/Student";
+import StudentCompany from "@/module/studentCompany/StudentCompany";
 import { RootState } from "@/store/store";
 import { useRouter } from "next/navigation";
 import React, { useEffect } from "react";
@@ -14,18 +14,13 @@ const DashboardPage = () => {
 
   useEffect(() => {
     if (authClient.isAuthenticated) {
-      if (authClient.user.isStudent) {
-        router.push(ApplicationConstant.STUDENT_DASHBOARD_PATH);
-      }
-      if (authClient.user.isStaff) {
-        router.push(ApplicationConstant.FACULTY_DASHBOARD_PATH);
-      }
+      router.push(ApplicationConstant.DASHBOARD_PATH);
     } else {
       router.push(ApplicationConstant.LOGIN_PATH);
     }
   }, []);
 
-  return <></>;
+  return <StudentCompany rowsPerPage={5} isClosed="False" />;
 };
 
 export default DashboardPage;

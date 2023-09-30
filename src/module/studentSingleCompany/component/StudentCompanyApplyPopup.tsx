@@ -30,7 +30,7 @@ const StudentCompanyApplyPopup = (props: {
 
   const handleUpdateProfile = () => {
     props.setOpen(!props.open);
-    router.push(ApplicationConstant.STUDENT_PROFILE_PATH);
+    router.push(ApplicationConstant.PROFILE_PATH);
   };
 
   return (

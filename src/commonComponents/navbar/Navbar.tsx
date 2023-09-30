@@ -14,7 +14,6 @@ const Navbar = (props: { showHideSidebar: any }) => {
   const [toggleProfileBar, setToggleProfileBar] = useState(false);
 
   const student = useSelector((state: RootState) => state.student);
-  const faculty = useSelector((state: RootState) => state.faculty);
 
   const handleToggleProfileBar = () => {
     setToggleProfileBar(!toggleProfileBar);
@@ -34,20 +33,18 @@ const Navbar = (props: { showHideSidebar: any }) => {
         className="flex relative items-center gap-[10px] cursor-pointer"
       >
         <Avatar
-          alt={student.firstName || faculty.firstName}
+          alt={student.firstName}
           src={
-            student.studentDetail?.profilePic ||
-            faculty.facultyDetail?.profilePic
-              ? student.studentDetail?.profilePic ||
-                faculty.facultyDetail?.profilePic
-              : student.firstName || faculty.firstName
+            student.studentDetail?.profilePic
+              ? student.studentDetail?.profilePic
+              : student.firstName
           }
           className="bg-[#01633B]"
         />
         <div className="font-medium">
           Welcome{" "}
           <span className="font-semibold">
-            {student.firstName.toUpperCase() || faculty.firstName.toUpperCase()}
+            {student.firstName.toUpperCase()}
           </span>
         </div>
         {toggleProfileBar && <ProfileBar />}
@@ -63,16 +60,7 @@ const ProfileBar = () => {
   return (
     <div className="w-full absolute top-[130%] p-[10px] text-center rounded-md bg-gray-100 shadow z-10">
       <div className="font-medium text-lg">
-        {user.isStudent && (
-          <Link href={ApplicationConstant.STUDENT_PROFILE_PATH}>
-            My Profile
-          </Link>
-        )}
-        {user.isStaff && (
-          <Link href={ApplicationConstant.FACULTY_PROFILE_PATH}>
-            My Profile
-          </Link>
-        )}
+        <Link href={ApplicationConstant.PROFILE_PATH}>My Profile</Link>
       </div>
       <button
         className="mt-4 text-sm text-red-500"
