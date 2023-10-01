@@ -109,14 +109,13 @@ const StudentCompanyApplyInfoPopup = (props: {
 
   const handleSubmit = async () => {
     const res = await appClient.post(ApiConstant.POST_APPLICATION, {
-      // status: "applied",
       studentId: student.studentDetail?.id,
       companyId: props.companyId,
     });
     ToastSuccessMessage(
       `Your application in ${props.companyName} successfully submited`
     );
-    router.push(ApplicationConstant.STUDENT_DASHBOARD_PATH);
+    router.push(ApplicationConstant.DASHBOARD_PATH);
   };
 
   return (

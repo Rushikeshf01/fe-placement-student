@@ -12,10 +12,6 @@ import {
   initialStudentState,
   studentProfile,
 } from "@/store/slice/studentSlice";
-import {
-  facultyProfile,
-  initialFacultyState,
-} from "@/store/slice/facultySlice";
 
 const authClient = axios.create({
   baseURL: ApiConstant.BASE_URL,
@@ -93,7 +89,10 @@ export const initializeAuthData = async () => {
         isAuthenticated: true,
       })
     );
-    return true;
+    if (response.data.user.isStudent) {
+      return true;
+    }
+    return false;
   } catch {
     setStoreToInitialState();
     localStorage.clear();
@@ -110,7 +109,6 @@ export const logoutFunc = () => {
 
 const setStoreToInitialState = () => {
   store.dispatch(studentProfile(initialStudentState));
-  store.dispatch(facultyProfile(initialFacultyState));
   store.dispatch(initialLoginState(initialUserState));
 };
 

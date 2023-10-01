@@ -50,24 +50,28 @@ const Login = () => {
       email: loginInputState.email,
       password: loginInputState.password,
     });
-    dispatch(
-      initialLoginState({
-        access: response.data.access,
-        refresh: response.data.refresh,
-        user: response.data.user,
-        isAuthenticated: true,
-      })
-    );
-    localStorage.setItem(
-      ApplicationConstant.REFRESH_TOKEN,
-      response.data.refresh
-    );
-    router.push(ApplicationConstant.DASHBOARD_PATH);
+    if (response.data.user.isStudent) {
+      dispatch(
+        initialLoginState({
+          access: response.data.access,
+          refresh: response.data.refresh,
+          user: response.data.user,
+          isAuthenticated: true,
+        })
+      );
+      localStorage.setItem(
+        ApplicationConstant.REFRESH_TOKEN,
+        response.data.refresh
+      );
+      router.push(ApplicationConstant.DASHBOARD_PATH);
+    } else {
+      ToastErrorMessage("No active account found with the given credentials");
+    }
   };
 
   return (
     <>
-      <p className="mt-6 text-3xl font-bold">Login</p>
+      <p className="mt-6 text-3xl font-bold">Student Login</p>
       <div className="grid grid-cols-2 gap-4 mt-3">
         <TextField
           value={loginInputState.email}

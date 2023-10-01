@@ -1,26 +1,26 @@
 "use client";
 
 import { ApplicationConstant } from "@/constant/applicationConstant";
+import StudentCompany from "@/module/studentCompany/StudentCompany";
 import { RootState } from "@/store/store";
-import { UserDetailType } from "@/utils/types";
 import { useRouter } from "next/navigation";
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 
-const FacultyPage = () => {
-  const authClient: UserDetailType = useSelector(
-    (state: RootState) => state.auth
-  );
-  const faculty = useSelector((state: RootState) => state.faculty);
+const StudentCompanyPage = () => {
   const router = useRouter();
 
+  const isAuthenticated: boolean = useSelector(
+    (state: RootState) => state.auth.isAuthenticated
+  );
+
   useEffect(() => {
-    if (!authClient.isAuthenticated) {
+    if (!isAuthenticated) {
       router.push(ApplicationConstant.LOGIN_PATH);
     }
   }, []);
 
-  return <>{authClient.user.isStaff && <div></div>}</>;
+  return <StudentCompany rowsPerPage={10} isFilterBar isClosed="True" />;
 };
 
-export default FacultyPage;
+export default StudentCompanyPage;

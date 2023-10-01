@@ -53,7 +53,7 @@ const StudentAccountDetail = () => {
   };
 
   return (
-    <div className="m-3 grid grid-cols-2 gap-2 gap-y-3.5">
+    <div className="m-3 mt-5 grid grid-cols-2 gap-2 gap-y-3.5">
       {studentAccountField.map((item, index) => (
         <TextField
           value={(studentAccountDetail as any)[item.name]}

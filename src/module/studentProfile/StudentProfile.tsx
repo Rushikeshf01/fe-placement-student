@@ -3,6 +3,9 @@ import { Divider } from "@mui/material";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
 import StudentAccountDetail from "./component/StudentAccountDetail";
+import StudentPersonalDetail from "./component/StudentPersonalDetail";
+import StudentCollegeDetail from "./component/StudentCollegeDetail";
+import StudentSchoolDetail from "./component/StudentSchoolDetail";
 
 const StudentProfile = () => {
   const [studentPersonalDetail, setStudentPersonalDetail] = useState();
@@ -19,14 +22,17 @@ const StudentProfile = () => {
       <Divider />
       <div>
         <p className="m-3 text-xl font-semibold">Personal Detail</p>
+        <StudentPersonalDetail />
       </div>
       <Divider />
       <div>
         <p className="m-3 text-xl font-semibold">College Detail</p>
+        <StudentCollegeDetail />
       </div>
       <Divider />
       <div>
         <p className="m-3 text-xl font-semibold">School Detail</p>
+        <StudentSchoolDetail />
       </div>
     </>
   );
