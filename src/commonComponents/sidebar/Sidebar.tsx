@@ -8,6 +8,7 @@ import {
   ExpandMore,
   Home,
   Person,
+  Approval
 } from "@mui/icons-material";
 import { NestedSidebarProps, SidebarRoutesType } from "@/utils/types";
 import { ApplicationConstant } from "@/constant/applicationConstant";
@@ -29,6 +30,11 @@ const studentSidebarRoutes: SidebarRoutesType[] = [
     path: ApplicationConstant.COMPANY_PATH,
     state: "Company",
     icon: <Business />,
+  },
+  {
+    path: ApplicationConstant.APPLIED_PATH,
+    state: "Applied",
+    icon: <Approval />,
   },
 ];
 

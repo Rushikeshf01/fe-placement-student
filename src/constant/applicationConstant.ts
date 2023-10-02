@@ -7,6 +7,7 @@ export const ApplicationConstant = {
   DASHBOARD_PATH: "/dashboard",
   PROFILE_PATH: "/dashboard/profile",
   COMPANY_PATH: "/dashboard/company",
+  APPLIED_PATH: "/dashboard/applied",
 };
 
 export const ApiConstant = {
@@ -29,4 +30,7 @@ export const ApiConstant = {
 
   // placement url
   POST_APPLICATION: "placement/apply/",
+
+  //applied company list url
+  GET_APPLIED_COMPANY: "placement/application/"
 };

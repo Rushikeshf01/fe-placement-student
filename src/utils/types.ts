@@ -103,3 +103,21 @@ export interface SingleCompanyItemType {
     updatedAt: string;
   }[];
 }
+
+export interface AppliedCompanyDetailListType {
+  count: number;
+  next: string | null;
+  previous: string | null;
+  results: SingleAppliedCompanyItemType[];
+}
+
+export interface SingleAppliedCompanyItemType {
+  id: string;
+  companyId: SingleCompanyItemType;
+  status: string;
+  appliedAt: string;
+  createdAt: string;
+  updatedAt: string;
+  studentId: string;
+  
+}
